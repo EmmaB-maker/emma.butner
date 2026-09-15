@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SNAC Demo | Time Perception Study</title>
+    <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        .demo-container {
+            max-width: 800px;
+            margin: 0 auto;
+        }
+
+        .experiment-area {
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 2rem;
+            text-align: center;
+            min-height: 500px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .instructions {
+            text-align: left;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+
+        .instructions p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .instructions ol {
+            margin: 1rem 0;
+            padding-left: 1.5rem;
+        }
+
+        .instructions li {
+            margin-bottom: 0.75rem;
+            line-height: 1.5;
+        }
+
+        .instruction-note {
+            background: rgba(126, 224, 160, 0.1);
+            padding: 0.75rem;
+            border-radius: 8px;
+            margin: 1rem 0;
+            font-style: italic;
+        }
+
+        .stimulus-emoji {
+            font-size: 8rem;
+            filter: drop-shadow(0 4px 20px rgba(0,0,0,0.3));
+        }
+
+        .math-question {
+            font-size: 2rem;
+            font-family: monospace;
+            color: var(--primary);
+            margin: 1rem 0;
+        }
+
+        .math-options {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            margin: 1rem 0;
+        }
+
+        .math-btn {
+            background: var(--surface-light);
+            border: 1px solid var(--border);
+            color: var(--text);
+            padding: 12px 30px;
+            border-radius: 8px;
+            font-size: 1.2rem;
+            cursor: pointer;
+            font-family: monospace;
+            transition: all 0.2s;
+        }
+
+        .math-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .hourglass-btn {
+            background: var(--surface-light);
+            border: 2px solid var(--border);
+            color: var(--text);
+            font-size: 3rem;
+            padding: 1rem 2rem;
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.2s;
+            width: 120px;
+            height: 120px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .hourglass-btn:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+            transform: scale(1.05);
+        }
+
+        .hourglass-btn.active {
+            border-color: var(--primary);
+            color: var(--primary);
+            background: rgba(126, 224, 160, 0.1);
+        }
+
+        .vastness-rating {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            width: 100%;
+        }
+
+        .vastness-slider {
+            width: 400px;
+            margin: 1rem 0;
+        }
+
+        .vastness-slider input {
+            width: 100%;
+            height: 4px;
+            background: var(--border);
+            border-radius: 2px;
+        }
+
+        .vastness-slider input::-webkit-slider-thumb {
+            -webkit-appearance: none;
+            width: 18px;
+            height: 18px;
+            background: var(--primary);
+            border-radius: 50%;
+            cursor: pointer;
+        }
+
+        .vastness-value {
+            font-family: monospace;
+            color: var(--primary);
+            margin-top: 0.5rem;
+        }
+
+        .next-btn, .reset-btn, .start-btn {
+            background: var(--primary);
+            color: var(--bg);
+            border: none;
+            padding: 12px 24px;
+            border-radius: 8px;
+            font-family: monospace;
+            font-weight: bold;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            transition: all 0.2s;
+        }
+
+        .next-btn:hover, .reset-btn:hover, .start-btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+
+        .results-area {
+            margin-top: 2rem;
+            padding: 1.5rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+        }
+
+        /* Scatter plot styles */
+        .chart-container {
+            width: 100%;
+            max-width: 560px;
+            margin: 1rem auto;
+            padding: 1.2rem 1.2rem 0.8rem;
+            background: var(--surface-light);
+            border-radius: 8px;
+            position: relative;
+        }
+
+        .chart-inner {
+            display: flex;
+            align-items: stretch;
+            gap: 12px;
+            position: relative;
+        }
+
+        .chart-y-axis {
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+            padding-right: 12px;
+            font-size: 0.8rem;
+            color: var(--text-light);
+            font-family: monospace;
+            min-width: 65px;
+            height: 280px;
+            text-align: right;
+        }
+
+        .chart-y-axis span {
+            line-height: 1.3;
+        }
+
+        .chart-y-axis .ms-label {
+            font-size: 0.85rem;
+            color: #9B59B6;
+        }
+
+        .chart-scatter {
+            flex: 1;
+            height: 280px;
+            position: relative;
+            border-left: 1px solid var(--border);
+            border-bottom: 1px solid var(--border);
+        }
+
+        .chart-point {
+            position: absolute;
+            transform: translate(-50%, 50%);
+            cursor: default;
+            z-index: 2;
+        }
+
+        .chart-point.actual {
+            width: 16px;
+            height: 16px;
+            background: #9B59B6;
+            border: 2px solid #9B59B6;
+            border-radius: 50%;
+        }
+
+        .chart-point.estimated {
+            width: 14px;
+            height: 14px;
+            background: #D4C4A8;
+            border: 2px solid #D4C4A8;
+            border-radius: 50%;
+        }
+
+        .chart-x-axis {
+            display: flex;
+            justify-content: space-around;
+            padding: 8px 0 0 0;
+            margin-left: 78px;
+            font-size: 0.85rem;
+            color: var(--text-light);
+            font-family: monospace;
+        }
+
+        .chart-x-axis span {
+            text-align: center;
+            flex: 1;
+            cursor: help;
+        }
+
+        .chart-legend {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            padding: 0.8rem 0 0.25rem;
+            font-size: 0.85rem;
+            font-family: monospace;
+            color: var(--text-light);
+        }
+
+        .chart-legend-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .chart-legend-color {
+            width: 14px;
+            height: 14px;
+            border-radius: 50%;
+        }
+
+        .chart-legend-color.actual {
+            background: #9B59B6;
+        }
+
+        .chart-legend-color.estimated {
+            background: #D4C4A8;
+        }
+
+        .trial-counter {
+            font-family: monospace;
+            color: var(--text-light);
+            margin-bottom: 1rem;
+        }
+
+        #trial-content {
+            width: 100%;
+            min-width: 500px;
+            max-width: 500px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .waiting-text {
+            color: var(--text-light);
+            font-family: monospace;
+            margin-top: 1rem;
+        }
+
+        .definition {
+            background: var(--surface-light);
+            padding: 0.5rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+        }
+
+        .trial-selector {
+            display: flex;
+            gap: 0.75rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin: 1.5rem 0;
+        }
+
+        .trial-option {
+            background: var(--surface-light);
+            border: 2px solid var(--border);
+            color: var(--text);
+            padding: 8px 16px;
+            border-radius: 8px;
+            cursor: pointer;
+            font-family: monospace;
+            font-size: 0.9rem;
+            transition: all 0.2s;
+        }
+
+        .trial-option:hover {
+            border-color: var(--primary);
+            color: var(--primary);
+        }
+
+        .trial-option.selected {
+            border-color: var(--primary);
+            background: rgba(126, 224, 160, 0.15);
+            color: var(--primary);
+        }
+
+        /* Debrief styles */
+        .debrief {
+            text-align: left;
+            max-width: 520px;
+            margin: 0 auto;
+            padding: 1.5rem 0 0;
+            border-top: 1px solid var(--border);
+        }
+
+        .debrief h3 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+            font-size: 1.1rem;
+        }
+
+        .debrief p {
+            margin-bottom: 1rem;
+            line-height: 1.6;
+            color: var(--text-light);
+            font-size: 0.95rem;
+        }
+
+        .debrief strong {
+            color: var(--text);
+        }
+
+        .debrief .fun-fact {
+            background: rgba(126, 224, 160, 0.08);
+            padding: 0.75rem;
+            border-radius: 8px;
+            border-left: 3px solid var(--primary);
+            margin-top: 1rem;
+        }
+
+        .debrief .fun-fact code {
+            color: var(--primary);
+            font-family: monospace;
+        }
+    </style>
+</head>
+<body>
+
+        <div class="section-header">
+            <span class="section-line"></span>
+        </div>
+
+        <div class="demo-container">
+            <div id="instructions-area" class="experiment-area">
+                <div class="instructions">
+                    <h3>📋 Study Instructions</h3>
+                    <p>This is a simplified demo of what participants experience in this experiment.</p>
+                    <ol>
+                        <li><strong>Math problem</strong> — a simple addition equation appears for <strong>3 seconds</strong>. Be ready!</li>
+                        <li><strong>Image</strong> — an image appears on screen for a few seconds. Watch carefully.</li>
+                        <li><strong>Math answer</strong> — two possible answers appear. Click the correct one.</li>
+                        <li><strong>Time reproduction</strong> — click the ⌛ to start timing, then click again to stop. Recreate how long the image was shown.</li>
+                        <li><strong>Vastness rating</strong> — drag the slider (0-100) to rate how vast the image felt.</li>
+                    </ol>
+                    <div class="instruction-note">
+                        ⚠️ When viewing the image, please don't count or use time-keeping strategies. Just observe naturally.
+                    </div>
+                    <div class="definition">
+                        📐 <strong>Vastness definition:</strong> when a space seems to extend to very far distances, seemingly without limit.
+                    </div><br>
+
+                    <p><strong>How many trials would you like to complete?</strong></p>
+                    <div class="trial-selector" id="trial-selector">
+                        <button class="trial-option" data-count="2">2 trials</button>
+                        <button class="trial-option selected" data-count="4">4 trials</button>
+                    </div>
+
+                    <p><em>Bonus: if you complete all trials you will get to see how well you did!</em></p>
+                    <button class="start-btn" id="start-experiment">begin experiment →</button>
+                </div>
+            </div>
+
+            <div id="experiment-area" class="experiment-area" style="display: none;">
+                <div class="trial-counter" id="trial-counter">Trial 1 / 4</div>
+                <div id="trial-content"></div>
+            </div>
+
+            <div id="results-area" class="results-area" style="display: none;">
+                <h3>📊 Your Results</h3>
+                <p>Your average over/under estimation: <span id="overall-bias" style="font-size: 1.8rem; font-weight: bold;"></span></p>
+
+                <div class="chart-container">
+                    <div class="chart-inner">
+                        <div class="chart-y-axis" id="y-axis-labels">
+                            <span><span class="ms-label">4000ms</span></span>
+                            <span><span class="ms-label">3000ms</span></span>
+                            <span><span class="ms-label">2000ms</span></span>
+                            <span><span class="ms-label">1000ms</span></span>
+                            <span><span class="ms-label">0ms</span></span>
+                        </div>
+                        <div class="chart-scatter" id="chart-scatter">
+                            <!-- Points drawn by JavaScript -->
+                        </div>
+                    </div>
+                    <div class="chart-x-axis" id="x-axis-labels">
+                        <!-- Trial numbers drawn by JavaScript -->
+                    </div>
+                </div>
+
+                <div class="chart-legend">
+                    <div class="chart-legend-item">
+                        <div class="chart-legend-color actual"></div>
+                        <span>Actual</span>
+                    </div>
+                    <div class="chart-legend-item">
+                        <div class="chart-legend-color estimated"></div>
+                        <span>Your Estimate</span>
+                    </div>
+                </div>
+
+                <!-- Debrief Section -->
+                <div class="debrief">
+                    <h3>📖 About the Real Study</h3>
+                    <p>
+                        <strong>Math:</strong> The equations are simply used as a distraction to make counting more difficult.
+                    </p>
+                    <p>
+                        <strong>Images:</strong> The images you saw are highly simplified emojis. We used a validated database to select images of high-arousal nature, high-arousal urban, low-arousal nature, and low-arousal urban, all randomly depicted. Participants see 60 images.
+                    </p>
+                    <p>
+                        <strong>Vastness:</strong> While not heavily used in this demo, we will analyze this data to better understand what makes up vastness and how the vastness of an image can alter our perceived time for how long it was shown.
+                    </p>
+                    
+                    <div class="fun-fact">
+                        <strong>✨ Fun fact:</strong> I coded this project using <code>PsychoPy</code>!
+                    </div>
+                </div>
+
+                <button class="reset-btn" id="reset-experiment" style="margin-top: 1.5rem;">start over →</button>
+            </div>
+        </div>
+
+    <script>
+        // Images: 2 nature (tree, mushroom), 2 urban (building, street sign)
+        const images = [
+            { name: 'tree', type: 'nature', emoji: '🌳', arousal: 'low' },
+            { name: 'mushroom', type: 'nature', emoji: '🍄', arousal: 'high' },
+            { name: 'building', type: 'urban', emoji: '🏢', arousal: 'low' },
+            { name: 'street-sign', type: 'urban', emoji: '🚦', arousal: 'high' }
+        ];
+
+        // Durations in ms
+        const durations = [2000, 2500, 3000, 3500];
+
+        let selectedTrialCount = 4;
+        let trials = [];
+        let currentTrialIndex = 0;
+        let imageStartTime = 0;
+        let imageDuration = 0;
+        let currentImage = null;
+        let currentMath = null;
+        let timerStartTime = 0;
+        let timerRunning = false;
+        let reproducedMs = 0;
+        let currentTimeout = null;
+        let updateInterval = null;
+
+        // Trial selection
+        document.querySelectorAll('.trial-option').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.trial-option').forEach(b => b.classList.remove('selected'));
+                this.classList.add('selected');
+                selectedTrialCount = parseInt(this.dataset.count);
+            });
+        });
+
+        function clearCurrentTimeout() {
+            if (currentTimeout) {
+                clearTimeout(currentTimeout);
+                currentTimeout = null;
+            }
+        }
+
+        function clearUpdateInterval() {
+            if (updateInterval) {
+                clearInterval(updateInterval);
+                updateInterval = null;
+            }
+        }
+
+        function getTrialContent() {
+            return document.getElementById('trial-content');
+        }
+
+        function generateTrials() {
+            const trialList = [];
+            // Select random subset of images based on trial count
+            const shuffledImages = [...images];
+            for (let i = shuffledImages.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [shuffledImages[i], shuffledImages[j]] = [shuffledImages[j], shuffledImages[i]];
+            }
+            const selectedImages = shuffledImages.slice(0, selectedTrialCount);
+
+            for (const image of selectedImages) {
+                const randomDuration = durations[Math.floor(Math.random() * durations.length)];
+                trialList.push({
+                    image: image,
+                    duration: randomDuration,
+                    mathAnswer: null,
+                    reproducedDuration: null,
+                    vastnessRating: null
+                });
+            }
+            // Shuffle trials
+            for (let i = trialList.length - 1; i > 0; i--) {
+                const j = Math.floor(Math.random() * (i + 1));
+                [trialList[i], trialList[j]] = [trialList[j], trialList[i]];
+            }
+            return trialList;
+        }
+
+        function generateMathEquation() {
+            const a = Math.floor(Math.random() * 20) + 1;
+            const b = Math.floor(Math.random() * 20) + 1;
+            const correct = a + b;
+            const wrong = correct + (Math.random() > 0.5 ? Math.floor(Math.random() * 5) + 1 : -Math.floor(Math.random() * 5) - 1);
+            const options = [correct, wrong].sort(() => Math.random() - 0.5);
+            return {
+                question: `${a} + ${b}`,
+                options: options,
+                correct: correct
+            };
+        }
+
+        function showMathPhase() {
+            currentMath = generateMathEquation();
+            const contentArea = getTrialContent();
+            contentArea.innerHTML = `
+                <div class="math-question">${currentMath.question} = ?</div>
+            `;
+
+            clearCurrentTimeout();
+            currentTimeout = setTimeout(() => {
+                showImagePhase();
+            }, 3000);
+        }
+
+        function showImagePhase() {
+            currentImage = trials[currentTrialIndex].image;
+            imageDuration = trials[currentTrialIndex].duration;
+
+            const contentArea = getTrialContent();
+            contentArea.innerHTML = `
+                <div class="stimulus-emoji">${currentImage.emoji}</div>
+            `;
+
+            imageStartTime = Date.now();
+
+            clearCurrentTimeout();
+            currentTimeout = setTimeout(() => {
+                showMathOptions();
+            }, imageDuration);
+        }
+
+        function showMathOptions() {
+            const contentArea = getTrialContent();
+            contentArea.innerHTML = `
+                <div class="math-question">Please answer the addition problem</div>
+                <div class="math-options">
+                    <button class="math-btn" data-value="${currentMath.options[0]}">${currentMath.options[0]}</button>
+                    <button class="math-btn" data-value="${currentMath.options[1]}">${currentMath.options[1]}</button>
+                </div>
+            `;
+
+            document.querySelectorAll('.math-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const selected = parseInt(e.target.dataset.value);
+                    trials[currentTrialIndex].mathAnswer = (selected === currentMath.correct);
+                    showDurationReproduction();
+                });
+            });
+        }
+
+        function showDurationReproduction() {
+            reproducedMs = 0;
+            timerRunning = false;
+            clearUpdateInterval();
+
+            const contentArea = getTrialContent();
+            contentArea.innerHTML = `
+                <div class="hourglass-btn" id="hourglass-btn">
+                    ⌛
+                </div>
+                <div class="waiting-text" style="margin-top: 1rem;">Click the hourglass to start timing, then click again to stop. Recreate how long the image was shown</div>
+            `;
+
+            const hourglassBtn = document.getElementById('hourglass-btn');
+
+            hourglassBtn.addEventListener('click', () => {
+                if (!timerRunning) {
+                    timerStartTime = Date.now();
+                    timerRunning = true;
+                    hourglassBtn.classList.add('active');
+
+                    updateInterval = setInterval(() => {
+                        if (timerRunning) {
+                            const elapsed = Date.now() - timerStartTime;
+                            reproducedMs = elapsed;
+                        } else {
+                            clearUpdateInterval();
+                        }
+                    }, 50);
+                } else {
+                    timerRunning = false;
+                    hourglassBtn.classList.remove('active');
+                    clearUpdateInterval();
+                    trials[currentTrialIndex].reproducedDuration = reproducedMs;
+
+                    const nextBtn = document.createElement('button');
+                    nextBtn.className = 'next-btn';
+                    nextBtn.textContent = 'next →';
+                    nextBtn.style.marginTop = '1rem';
+                    nextBtn.addEventListener('click', () => showVastnessRating());
+                    contentArea.appendChild(nextBtn);
+                }
+            });
+        }
+
+        function showVastnessRating() {
+            const contentArea = getTrialContent();
+            contentArea.innerHTML = `
+                <div class="vastness-rating">
+                    <p>How vast was the image?</p>
+                    <p>Vastness: a perceptual phenomenon that occurs when a space seems to extend to very far distances, seemingly without limit.</p>
+                    <div class="vastness-slider">
+                        <input type="range" id="vastness-slider" min="0" max="100" value="50">
+                        <div class="vastness-value" id="vastness-value">50</div>
+                    </div>
+                    <button class="next-btn" id="submit-vastness">submit →</button>
+                </div>
+            `;
+
+            const slider = document.getElementById('vastness-slider');
+            const valueDisplay = document.getElementById('vastness-value');
+
+            slider.addEventListener('input', () => {
+                valueDisplay.textContent = slider.value;
+            });
+
+            document.getElementById('submit-vastness').addEventListener('click', () => {
+                trials[currentTrialIndex].vastnessRating = parseInt(slider.value);
+                currentTrialIndex++;
+                updateProgress();
+
+                if (currentTrialIndex < trials.length) {
+                    showMathPhase();
+                } else {
+                    showResults();
+                }
+            });
+        }
+
+        function updateProgress() {
+            const trialCounter = document.getElementById('trial-counter');
+            if (trialCounter) trialCounter.textContent = `Trial ${currentTrialIndex + 1} / ${trials.length}`;
+        }
+
+        function showResults() {
+            clearCurrentTimeout();
+            clearUpdateInterval();
+
+            document.getElementById('experiment-area').style.display = 'none';
+            document.getElementById('results-area').style.display = 'block';
+
+            // Calculate overall bias
+            let totalBias = 0;
+            let validTrials = 0;
+
+            trials.forEach(trial => {
+                const actual = trial.duration;
+                const reproduced = trial.reproducedDuration;
+                if (reproduced !== null && reproduced !== undefined) {
+                    const bias = reproduced - actual;
+                    const percentBias = (bias / actual) * 100;
+                    totalBias += percentBias;
+                    validTrials++;
+                }
+            });
+
+            const overallAvg = validTrials > 0 ? totalBias / validTrials : 0;
+            const overallClass = overallAvg > 0 ? 'bias-positive' : 'bias-negative';
+            const overallSymbol = overallAvg > 0 ? '↑' : '↓';
+
+            document.getElementById('overall-bias').innerHTML = `<span class="${overallClass}">${overallSymbol} ${Math.abs(overallAvg).toFixed(1)}%</span>`;
+
+            drawScatterPlot();
+        }
+
+        function drawScatterPlot() {
+            const container = document.getElementById('chart-scatter');
+            const xAxisContainer = document.getElementById('x-axis-labels');
+            if (!container) return;
+
+            container.innerHTML = '';
+            xAxisContainer.innerHTML = '';
+
+            const maxDuration = 4000;
+            const height = 280;
+            const padding = 20;
+            const plotHeight = height - padding * 2;
+
+            const containerWidth = container.clientWidth || 400;
+            const n = trials.length;
+            const spacing = containerWidth / (n + 1);
+
+            trials.forEach((trial, index) => {
+                const actual = trial.duration;
+                const reproduced = trial.reproducedDuration || 0;
+                const xPos = spacing * (index + 1);
+
+                const actualY = padding + plotHeight - (actual / maxDuration) * plotHeight;
+                const estY = padding + plotHeight - (reproduced / maxDuration) * plotHeight;
+
+                // Actual point
+                const actualPoint = document.createElement('div');
+                actualPoint.className = 'chart-point actual';
+                actualPoint.style.left = xPos + 'px';
+                actualPoint.style.top = actualY + 'px';
+                actualPoint.title = `Actual: ${actual}ms`;
+                container.appendChild(actualPoint);
+
+                // Estimated point
+                const estPoint = document.createElement('div');
+                estPoint.className = 'chart-point estimated';
+                estPoint.style.left = xPos + 'px';
+                estPoint.style.top = estY + 'px';
+                estPoint.title = `Your estimate: ${reproduced}ms`;
+                container.appendChild(estPoint);
+
+                // Trial label
+                const label = document.createElement('span');
+                const emoji = trial.image.emoji;
+                label.textContent = `${emoji}#${index + 1}`;
+                label.title = `${trial.image.name}: ${actual}ms actual, ${reproduced}ms estimate`;
+                xAxisContainer.appendChild(label);
+            });
+        }
+
+        window.addEventListener('resize', () => {
+            if (document.getElementById('results-area').style.display === 'block') {
+                drawScatterPlot();
+            }
+        });
+
+        function startExperiment() {
+            clearCurrentTimeout();
+            clearUpdateInterval();
+
+            document.getElementById('instructions-area').style.display = 'none';
+            document.getElementById('experiment-area').style.display = 'flex';
+            document.getElementById('results-area').style.display = 'none';
+
+            trials = generateTrials();
+            currentTrialIndex = 0;
+            updateProgress();
+            showMathPhase();
+        }
+
+        function resetExperiment() {
+            document.getElementById('results-area').style.display = 'none';
+            document.getElementById('experiment-area').style.display = 'none';
+            document.getElementById('instructions-area').style.display = 'flex';
+        }
+
+        document.getElementById('start-experiment').addEventListener('click', startExperiment);
+        document.getElementById('reset-experiment').addEventListener('click', resetExperiment);
+    </script>
+</body>
+</html>
