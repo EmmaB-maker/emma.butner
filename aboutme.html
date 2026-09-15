@@ -3,362 +3,171 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma Butner | Cognitive Neuroscience & Design</title>
+    <title>Emma Butner | About Me</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Two-column layout */
-        .two-column-container {
-            display: grid;
-            grid-template-columns: 1fr 2fr;
-            gap: 40px;
-            margin: 30px 0;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-        
-        /* Left column styling */
-        .left-column {
-            background: #F8FAF9;
-            padding: 25px;
-            border-radius: 15px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-        }
-        
-        .profile-image {
-            width: 100%;
-            border-radius: 12px;
-            margin-bottom: 20px;
-            box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-        }
-        
-        .name-title {
-            color: #2F362F;
-            margin-bottom: 5px;
-        }
-        
-        .subtitle {
-            color: #788978;
-            font-size: 1.1rem;
-            margin-bottom: 20px;
-        }
-        
-        .quick-info {
-            margin: 25px 0;
-            padding-top: 25px;
-            border-top: 2px solid #D9D3C6;
-        }
-        
-        .info-section {
-            margin-bottom: 25px;
-        }
-        
-        .info-section h3 {
-            color: #788978;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 1px;
-            margin-bottom: 12px;
-            padding-bottom: 5px;
-            border-bottom: 1px solid #D9D3C6;
-        }
-        
-        .info-list {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        
-        .info-list li {
-            padding: 6px 0;
-            color: #2F362F;
-            font-size: 0.95rem;
-            display: flex;
-            align-items: flex-start;
-        }
-        
-        .info-list li i {
-            color: #788978;
-            margin-right: 10px;
-            margin-top: 3px;
-            width: 16px;
-        }
-        
-        /* Right column styling */
-        .right-column {
-            padding: 10px 0;
-        }
-        
-        .section-title {
-            color: #788978;
-            font-size: 1.8rem;
-            margin-bottom: 20px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid #D9D3C6;
-        }
-        
-        .about-blurb {
-            font-size: 1.1rem;
-            line-height: 1.7;
-            color: #2F362F;
-            margin-bottom: 30px;
-        }
-        
-        .lab-image-container {
-            margin: 30px 0;
-            text-align: center;
-        }
-        
-        .lab-image {
-            width: 100%;
-            max-width: 600px;
-            border-radius: 12px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.08);
-        }
-        
-        .caption {
-            font-style: italic;
-            color: #666;
-            font-size: 0.9rem;
-            margin-top: 10px;
-            text-align: center;
-        }
-
-        .connect-bar {
-            background: #F8FAF9;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        h3, .connect-bar h3 {
-            color: #788978;
-            margin-bottom: 20px;
-        }
-        
-        .cv-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .cv-button {
-            padding: 12px 25px;
-            background: #788978;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .cv-button:hover {
-            background: #2F362F;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        
-        .connect-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .connect-button {
-            padding: 12px 25px;
-            background: #2F362F;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .connect-button:hover {
-            background: #788978;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        
-        /* Featured work styling */
-        .featured-work {
-            margin: 50px 0;
-        }
-        
-        /* Responsive design */
-        @media (max-width: 992px) {
-            .two-column-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .left-column, .right-column {
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            
-            .bottom-bars {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .two-column-container {
-                margin: 15px 0;
-            }
-            
-            .left-column, .right-column, .cv-bar, .connect-bar {
-                padding: 20px;
-            }
-            
-            .cv-buttons, .connect-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cv-button, .connect-button {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-        }
-    </style>
 </head>
 <body>
+    <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-path">emma-butner/about</span>
+        <span class="cursor">_</span>
+    </div>
+
     <header>
-        <h1>Emma Butner</h1>
+        <h1>EMMA BUTNER</h1>
+        <div class="theme-toggle-container">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="aboutme.html">About Me</a>
-            <a href="websites.html">Websites</a>
-            <a href="experiment.html">Projects</a>
-            <a href="p&p.html">Posters & Publications</a>
+            <a href="index.html">~/home</a>
+            <a href="aboutme.html">~/about</a>
+            <a href="websites.html">~/websites</a>
+            <a href="experiment.html">~/projects</a>
+            <a href="p&p.html">~/publications</a>
         </nav>
     </header>
 
     <main>
         <!-- Two Column Layout -->
         <div class="two-column-container">
-            <!-- Left Column -->
+            <!-- Left Column - Profile & Info -->
             <div class="left-column">
-                <img src="images/portrait.jpg" alt="Emma Butner" class="profile-image">
+                <img src="images/portrait.png" alt="Emma Butner" class="profile-image">
                 
-                <h2 class="name-title">Emma Butner</h2>
-                <p class="subtitle">PhD Student in Cognitive Psychology</p>
-                
-                <p>I'm a Graduate Student in cognitive psychology at the University of Utah. I research how we perceive time and space, and use those insights to build better experiences. My work sits at the intersection of experimental research and practical application. I explore how motion and emotion shape our subjective reality to directly inform user engagement and design.</p>
+                <div class="code-header">
+                    <span class="tag">$ who am i</span>
+                </div>
+                <p class="bio-intro">I'm a cognitive psychology PhD student at the University of Utah. My research explores how we perceive time and space, and how those insights can inform more intuitive, engaging experiences.</p>
 
-                <div class="quick-info">
-                    <div class="info-section">
-                        <h3>Contact & Info</h3>
-                        <ul class="info-list">
-                            <li><i class="fas fa-vr-cardboard"></i> XR Researcher</li>
-                            <li><i class="fas fa-envelope"></i> <a href="mailto:ebutner06@gmail.com"  style="color: #788978; text-decoration: none;">ebutner06@gmail.com</a></li>
-                            <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/emma-butner/" style="color: #788978; text-decoration: none;" target="_blank">LinkedIn Profile</a></li>
-                        </ul>
+                <div class="info-section">
+                    <div class="info-header">
+                        <span class="info-prompt">➜</span>
+                        <span class="info-title">contact</span>
                     </div>
-                    
-                    <div class="info-section">
-                        <h3>Research Skills</h3>
-                        <ul class="info-list">
-                            <li><i class="fas fa-flask"></i> Experimental Design & Methodology</li>
-                            <li><i class="fas fa-chart-line"></i> Statistical Analysis & Data Visualization</li>
-                            <li><i class="fas fa-file-alt"></i> Academic Writing & Publication</li>
-                        </ul>
+                    <ul class="info-list">
+                        <li><i class="fas fa-envelope"></i> <a href="mailto:ebutner06@gmail.com">ebutner06@gmail.com</a></li>
+                        <li><i class="fab fa-linkedin"></i> <a href="https://www.linkedin.com/in/emma-butner/" target="_blank">linkedin/in/emma-butner</a></li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-header">
+                        <span class="info-prompt">➜</span>
+                        <span class="info-title">skills --research</span>
                     </div>
-                    
-                    <div class="info-section">
-                        <h3>Technical Skills</h3>
-                        <ul class="info-list">
-                            <li><i class="fab fa-r-project"></i> R Statistical Programming</li>
-                            <li><i class="fab fa-python"></i> Python</li>
-                            <li><i class="fab fa-html5"></i> HTML/CSS</li>
-                            <li><i class="fab fa-html5"></i> Recap / Qualtrics Survey Creation</li>
-                            <li><i class="fas fa-gamepad"></i> Unity VR Development</li>
-                            <li><i class="fas fa-brain"></i> PsychoPy Experiment Builder</li>
-                        </ul>
+                    <ul class="info-list">
+                        <li><i class="fas fa-flask"></i> Experimental Design</li>
+                        <li><i class="fas fa-chart-line"></i> Statistical Analysis</li>
+                        <li><i class="fas fa-file-alt"></i> Academic Writing</li>
+                    </ul>
+                </div>
+
+                <div class="info-section">
+                    <div class="info-header">
+                        <span class="info-prompt">➜</span>
+                        <span class="info-title">skills --technical</span>
                     </div>
-                    
-                    <div class="info-section">
-                        <h3>Professional Strengths</h3>
-                        <ul class="info-list">
-                            <li><i class="fas fa-lightbulb"></i> Project Management</li>
-                            <li><i class="fas fa-bridge"></i> Data Management</li>
-                            <li><i class="fas fa-users"></i> Collaborative Research</li>
-                            <li><i class="fas fa-chalkboard-teacher"></i> Science Communication</li>
-                        </ul>
+                    <ul class="info-list">
+                        <li><i class="fab fa-r-project"></i> R / Python</li>
+                        <li><i class="fab fa-html5"></i> HTML/CSS</li>
+                        <li><i class="fas fa-gamepad"></i> Unity VR</li>
+                        <li><i class="fas fa-brain"></i> PsychoPy</li>
+                    </ul>
+                </div>
+
+                <div class="cv-section">
+                    <div class="info-header">
+                        <span class="info-prompt">➜</span>
+                        <span class="info-title">download</span>
+                    </div>
+                    <div class="cv-buttons">
+                        <a href="CV grad school.pdf" class="cv-button" download target="_blank">
+                            <i class="fas fa-file-pdf"></i> cv.pdf
+                        </a>
+                        <a href="Resume Grad.pdf" class="cv-button" download target="_blank">
+                            <i class="fas fa-file-pdf"></i> resume.pdf
+                        </a>
                     </div>
                 </div>
             </div>
-            
-            <!-- Right Column -->
+
+            <!-- Right Column - Bio & Research -->
             <div class="right-column">
-               
-                <div class="about-blurb">
-                    <p>My research career began with a fundamental curiosity about how we construct our reality.</p>
-                    <br>
-                    <p>This foundation led me to investigate broader questions about what shapes our experience of the world during my BS in Psychology at the University of Washington, where I worked on projects examining how environmental factors and social dynamics influence perception and behavior. Through this work, I developed strong analytical skills in R programming and statistical analysis.</p>
-                    <br>
-                    <p>A turning point came when I encountered the concept of active sensing, the idea that perception requires movement. This insight fundamentally shifted my research focus toward embodied cognition. I became fascinated with how motion shapes our experience of space and time, particularly in immersive environments.</p>
-                    <br>
-                    <p>Now as a PhD candidate in the VAAST Lab at the University of Utah, I use virtual reality to investigate how movement influences spatial and temporal perception. My current work explores what happens when we manipulate the visual feedback of walking in VR. I study how the brain adapts its perceptual representations when sensory information conflicts with motor output.</p>
-                    <br>
-                    <p>My work focuses on how fundamental processes like motion and emotion warp our sense of time passage and distance perceptions. I study how we adapt to changing environments, to understand the human cognition that can explain our behaviors. These are not just lab phenomena, the warping of subjective time and space is a fundamental factor in user engagement and product design. Understanding these perceptual mechanisms has direct applications in creating more intuitive and engaging user experiences.</p>
-                    <br>
-                    <p>My approach combines rigorous experimental design with technical implementation, bridging cognitive psychology research with practical application. I'm interested in how fundamental principles of perception can inform better design of VR environments and user interfaces.</p>
+                <div class="section-header">
+                    <span class="section-prompt">$ research-journey</span>
+                    <span class="section-line"></span>
                 </div>
                 
-                <div class="lab-image-container">
-                    <img src="images/vaast2.jpg" class="lab-image">
-                    <p class="caption">The VAAST (Vision, Audition, Action, in Space & Time) Lab at the University of Utah. My research home where we study perception and navigation in virtual and augmented reality environments.</p>
+                <div class="about-blurb">
+                    My research started with a simple question: how do we construct reality?
+                    <br><br>
+                    As an undergrad at the University of Washington, I studied how environment and social dynamics shape perception. That's where I fell in love with data manipulation.
+                    <br><br>
+                    Then I discovered active sensing: the idea that perception requires movement. That flipped everything. It pulled me from static lab tasks into VR headsets and motion capture, asking how the body shapes the mind.
+                    <br><br>
+                    Today, as a PhD student in the VAAST Lab at the University of Utah, I use virtual reality to study what happens when your eyes and your body disagree. If you're walking but the world moves faster or slower than expected, how does your brain recalibrate space and time?
+                    <br><br>
+                    These aren't just academic questions. Time warps when you're engaged. Space compresses when you're immersed. Understanding these mechanisms is the key to building better VR, better interfaces, and better experiences.
                 </div>
 
-                <div class="cv-buttons">
-                    <a href="images/CV grad school.pdf" class="cv-button" download target="_blank">
-                        <i class="fas fa-file-pdf"></i> Download Full CV
-                    </a>
-                    <a href="images/Resume Grad.pdf" class="cv-button" download target="_blank">
-                        <i class="fas fa-file-pdf"></i> Download 1-Page Resume
-                    </a>
+                <div class="lab-container">
+                    <img src="images/vaast2.jpg" alt="VAAST Lab" class="lab-image">
+                    <p class="caption">The VAAST Lab at the University of Utah — studying perception and navigation in VR/AR environments.</p>
                 </div>
-                <br>
-                    
-                    <!-- Connect Bar -->
-                <div class="connect-bar">
-                    <h3 style="font-size: 2rem;">Let's Connect</h3>
-                    <p style="margin-bottom: 20px; color: #666;">I'm always interested in discussing research, collaboration, or innovative projects at the intersection of cognitive science and application. Let's explore how perception research can inform better design and experiences.</p>
-                    <div class="connect-buttons">
-                        <a href="mailto:ebutner06@gmail.com" class="connect-button">
-                            <i class="fas fa-envelope"></i> Email Me
-                        </a>
-                        <a href="https://www.linkedin.com/in/emma-butner/" class="connect-button" target="_blank">
-                            <i class="fab fa-linkedin"></i> LinkedIn
-                        </a>
-                    </div>
-                </div>
+
+                
+            </div>
+        </div>
+        <!-- Connect Section -->
+        <div class="contact-terminal">
+            <div class="contact-prompt">
+                <span class="prompt-arrow">➜</span>
+                <span class="contact-cmd">collaborate</span>
+            </div>
+            <p class="connect-text">Interested in discussing research, collaboration, or innovative projects at the intersection of cognitive science and design? Let's connect.</p>
+            <div class="contact-links">
+                <a href="mailto:ebutner06@gmail.com" class="contact-link">ebutner06@gmail.com</a>
+                <a href="https://www.linkedin.com/in/emma-butner/" class="contact-link" target="_blank">linkedin/in/emma-butner</a>
             </div>
         </div>
     </main>
 
     <footer>
-        <div class="footer-text">
-            <h2>Contact me:</h2> 
-            <a href="mailto:ebutner06@gmail.com" target="_blank">ebutner06@gmail.com</a>
-            <a href="https://www.linkedin.com/in/emma-butner/" target="_blank">LinkedIn</a>
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            <span class="footer-cmd">emma-butner — last commit: 2026</span>
         </div>
     </footer>
+
+    <script>
+        // Theme Toggle with localStorage persistence
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Check saved preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.body.classList.remove('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', function() {
+            const isLight = document.body.classList.toggle('light-theme');
+            if (isLight) {
+                this.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                this.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        });
+    </script>
 </body>
 </html>

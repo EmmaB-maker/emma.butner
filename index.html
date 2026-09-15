@@ -3,187 +3,186 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma Butner | Cognitive Neuroscience & Design</title>
+    <title>Emma Butner | Cognitive Science + Design</title>
     <link rel="stylesheet" href="home.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <style>
-        /* Two-column layout */
-        .two-column-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 40px;
-            margin: 30px 0;
-            max-width: 1200px;
-            margin-left: auto;
-            margin-right: auto;
-            align-items: stretch;
-        }
-
-        .connect-bar {
-            background: #F8FAF9;
-            padding: 20px;
-            border-radius: 15px;
-            text-align: center;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-            max-width: 700px;
-            margin: 0 auto;
-            align-items: center;
-            min-height: 180px;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-        }
-
-        h3, .connect-bar h3 {
-            color: #788978;
-            margin-bottom: 20px;
-        }
-        
-        .connect-buttons {
-            display: flex;
-            gap: 15px;
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .connect-button {
-            padding: 12px 25px;
-            background: #2F362F;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: bold;
-            transition: all 0.3s ease;
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-        }
-        
-        .connect-button:hover {
-            background: #788978;
-            transform: translateY(-3px);
-            box-shadow: 0 8px 15px rgba(0,0,0,0.1);
-        }
-        
-        /* Responsive design */
-        @media (max-width: 992px) {
-            .two-column-container {
-                grid-template-columns: 1fr;
-                gap: 30px;
-            }
-            
-            .left-column, .right-column {
-                max-width: 800px;
-                margin: 0 auto;
-            }
-            
-            .bottom-bars {
-                grid-template-columns: 1fr;
-                gap: 20px;
-            }
-        }
-        
-        @media (max-width: 768px) {
-            .two-column-container {
-                margin: 15px 0;
-            }
-            
-            .left-column, .right-column, .cv-bar, .connect-bar {
-                padding: 20px;
-            }
-            
-            .cv-buttons, .connect-buttons {
-                flex-direction: column;
-                align-items: center;
-            }
-            
-            .cv-button, .connect-button {
-                width: 100%;
-                max-width: 300px;
-                justify-content: center;
-            }
-        }
-    </style>
 </head>
 <body>
+    <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-path">emma-butner/portfolio</span>
+        <span class="cursor">_</span>
+    </div>
+
     <header>
-        <h1>Emma Butner</h1>
+        <h1>EMMA BUTNER</h1>
+        <div class="theme-toggle-container">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
+        <nav>
+            <a href="index.html">~/home</a>
+            <a href="aboutme.html">~/about</a>
+            <a href="websites.html">~/websites</a>
+            <a href="experiment.html">~/projects</a>
+            <a href="p&p.html">~/publications</a>
+        </nav>
     </header>
 
     <main>
-        <div class="two-column-container">
-        <div class="connect-bar">
-            <div class="connect-buttons">
-                <a href="aboutme.html" class="connect-button">
-                    <h3 style="font-size: 2rem; color: #ffffff;">About Me</h3><br>
-                    <p style="margin-bottom: 20px; color: #ffffff;">
-                        <br>My research focuses on visual perception and sensory input. 
-                        I work with virtual reality to help me study these phenomena.
-                    </p>
-                </a>
+        <!-- Hero -->
+        <div class="hero">
+            <div class="hero-badge"> active research </div>
+            <h2>Bridging<br><span class="gradient-text">cognitive science & design</span></h2>
+            <p class="hero-subtitle">PhD student researching time perception, spatial navigation, and VR.</p>
+            <div class="hero-buttons">
+                <a href="aboutme.html" class="button secondary">about me</a>
+                <a href="websites.html" class="button primary">my websites</a>
+                <a href="experiment.html" class="button secondary">view projects →</a>
+                <a href="p&p.html" class="button primary">all publications</a>
             </div>
         </div>
 
-        <div class="connect-bar">
-            <div class="connect-buttons">
-                <a href="websites.html" class="connect-button">
-                    <h3 style="font-size: 2rem; color: #ffffff;">Websites</h3>
-                    <p style="margin-bottom: 20px; color: #ffffff;">
-                        I built this portfolio site from scratch using HTML and CSS.
-                        I enjoy making websites for family and companies for ease of interaciton.
-                    </p>
-                </a>
+        <!-- Research Areas - Grid -->
+        <div class="research-grid">
+            <div class="research-card">
+                <h3>Time Perception</h3>
+                <p>How emotion and motion warp our sense of time</p>
+                <span class="card-tag">active</span>
+            </div>
+            <div class="research-card">
+                <h3>Spatial Navigation</h3>
+                <p>Understanding how we perceive and move through space</p>
+                <span class="card-tag">active</span>
+            </div>
+            <div class="research-card">
+                <h3>Virtual Reality</h3>
+                <p>Using VR to study perceptual-motor recalibration</p>
+                <span class="card-tag">active</span>
             </div>
         </div>
 
-        <div class="connect-bar">
-            <div class="connect-buttons">
-                <a href="experiment.html" class="connect-button">
-                    <h3 style="font-size: 2rem; color: #ffffff;">Projects</h3>
-                    <p style="margin-bottom: 20px; color: #ffffff;">
-                        I am involved in studies on spatial and temporal perceptions.
-                        Ongoing projects include VR-based movement research.
-                    </p>
-                </a>
+        <!-- Featured Work -->
+        <div class="featured-section">
+            <div class="section-header">
+                <span class="section-prompt">$ featured</span>
+                <span class="section-line"></span>
             </div>
-        </div>
-
-        <div class="connect-bar">
-            <div class="connect-buttons">
-                <a href="p&p.html" class="connect-button">
-                    <h3 style="font-size: 2rem; color: #ffffff;">Posters & Publications</h3>
-                    <p style="margin-bottom: 20px; color: #ffffff;">
-                        Dissemination is equally important as the research.
-                        I present at conferences and am working on publications.
-                    </p>
-                </a>
-            </div>
-        </div>
-
-        </div>
-
-        <div class="connect-bar">
-            <h3 style="font-size: 2rem;">Let's Connect</h3>
-                <p style="margin-bottom: 20px; color: #666;">I'm always interested in discussing research, collaboration, or innovative projects at the intersection of cognitive science and application. Let's explore how perception research can inform better design and experiences.</p>
-                <div class="connect-buttons">
-                    <a href="mailto:ebutner06@gmail.com" class="connect-button">
-                        <i class="fas fa-envelope"></i> Email Me
-                    </a>
-                    <a href="https://www.linkedin.com/in/emma-butner/" class="connect-button" target="_blank">
-                        <i class="fab fa-linkedin"></i> LinkedIn
-                    </a>
+            <div class="featured-grid">
+                <div class="featured-card">
+                    <div class="featured-number">01</div>
+                    <h4>Recalibration of Space & Time</h4>
+                    <p>Master's project investigating mismatched visual and motor feedback in VR</p>
+                    <a href="experiment.html" class="card-link">explore →</a>
                 </div>
+                <div class="featured-card">
+                    <div class="featured-number">02</div>
+                    <h4>Digital Phenotyping</h4>
+                    <p>Using smartphone sensor data to predict mental health risk</p>
+                    <a href="p&p.html" class="card-link">read paper →</a>
+                </div>
+                <div class="featured-card">
+                    <div class="featured-number">03</div>
+                    <h4>STEP VR Project</h4>
+                    <p>Testing the relationship between space and time in immersive environments</p>
+                    <a href="experiment.html" class="card-link">see methods →</a>
+                </div>
+            </div>
         </div>
 
+        <!-- Fun but subtle: command line to contact -->
+        <div class="contact-terminal">
+            <div class="contact-prompt">
+                <span class="prompt-arrow">➜</span>
+                <span class="contact-cmd">contact-emma.butner</span>
+            </div>
+            <div class="contact-links">
+                <a href="mailto:ebutner06@gmail.com" class="contact-link">ebutner06@gmail.com</a>
+                <a href="https://www.linkedin.com/in/emma-butner/" class="contact-link" target="_blank">linkedin/in/emma-butner</a>
+                <a href="CV grad school.pdf" class="contact-link" target="_blank">📄 download_cv.pdf</a>
+            </div>
+        </div>
     </main>
 
     <footer>
-        <div class="footer-text">
-            <h2>Contact me:</h2> 
-            <a href="mailto:ebutner06@gmail.com" target="_blank">ebutner06@gmail.com</a>
-            <a href="https://www.linkedin.com/in/emma-butner/" target="_blank">LinkedIn</a>
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            <span class="footer-cmd">emma-butner — last commit: 2026</span>
         </div>
-        <em>Last Updated April 2026</em>
     </footer>
+
+    <script>
+        // Typed tagline effect
+        const taglines = [
+            "cognitive science researcher",
+            "VR & perception scientist", 
+            "design-informed researcher",
+            "motion & time perception"
+        ];
+        
+        let taglineIndex = 0;
+        let charIndex = 0;
+        let isDeleting = false;
+        const typedElement = document.getElementById('typed-tagline');
+        
+        function typeEffect() {
+            const currentTagline = taglines[taglineIndex];
+            
+            if (isDeleting) {
+                typedElement.textContent = currentTagline.substring(0, charIndex - 1);
+                charIndex--;
+            } else {
+                typedElement.textContent = currentTagline.substring(0, charIndex + 1);
+                charIndex++;
+            }
+            
+            if (!isDeleting && charIndex === currentTagline.length) {
+                isDeleting = true;
+                setTimeout(typeEffect, 2500);
+                return;
+            }
+            
+            if (isDeleting && charIndex === 0) {
+                isDeleting = false;
+                taglineIndex = (taglineIndex + 1) % taglines.length;
+                setTimeout(typeEffect, 500);
+                return;
+            }
+            
+            const speed = isDeleting ? 50 : 100;
+            setTimeout(typeEffect, speed);
+        }
+        
+        if (typedElement) {
+            setTimeout(typeEffect, 500);
+        }
+
+        // Theme Toggle with localStorage persistence
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Check saved preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.body.classList.remove('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', function() {
+            const isLight = document.body.classList.toggle('light-theme');
+            if (isLight) {
+                this.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                this.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
+        }); 
+    </script>
 </body>
 </html>

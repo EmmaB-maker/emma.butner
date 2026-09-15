@@ -3,32 +3,85 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Emma Butner - Websites</title>
+    <title>Emma Butner | Websites</title>
     <link rel="stylesheet" href="home.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Center the computer setup and enlarge it */
+        .computer-setup {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            margin: 0 auto;
+            transform: scale(1.3);
+            transform-origin: top center;
+            padding: 2rem 0 4rem 0;
+        }
+
+        .monitor {
+            width: 900px !important;
+            max-width: 95vw;
+        }
+
+        .screen {
+            height: 400px !important;
+        }
+
+        .screen-content {
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        /* Make iframe fill the screen nicely */
+        .website-iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+
+        .keyboard-container {
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            margin-top: 3rem;
+        }
+    </style>
 </head>
 <body>
+    <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-path">emma-butner/websites</span>
+        <span class="cursor">_</span>
+    </div>
+
     <header>
-        <h1>Website Creations</h1>
+        <h1>EMMA BUTNER</h1>
+        <div class="theme-toggle-container">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="aboutme.html">About Me</a>
-            <a href="websites.html">Websites</a>
-            <a href="experiment.html">Projects</a>
-            <a href="p&p.html">Posters and Publications</a>
+            <a href="index.html">~/home</a>
+            <a href="aboutme.html">~/about</a>
+            <a href="websites.html">~/websites</a>
+            <a href="experiment.html">~/projects</a>
+            <a href="p&p.html">~/publications</a>
         </nav>
     </header>
 
     <main>
-        <!--<p style="color: fuchsia;">Add hover over features that explain what I did maybe?
-            <br>e.g., family echo website embeded
-            <br>Maybe the computer needs to be turned on? click the green button to turn it red / off.
-            <Sbr>Need to take phone screen grabs for phone version.
-            <br>Want phone and computer to scroll together
-            <br>Maybe find a way to zoom / make it larger? - maybe when on the computer or phone, the mouse turns into a magnifyer
-        </p>-->
-        
+        <div class="section-header">
+            <span class="section-prompt">$ websites</span>
+            <span class="section-line"></span>
+        </div>
+
+        <!-- Computer Setup (centered & enlarged) -->
         <div class="computer-setup">
-            <!-- Computer Tower - behind monitor -->
+            <!-- Computer Tower -->
             <div class="tower">
                 <div class="tower-front">
                     <div class="tower-led"></div>
@@ -40,7 +93,7 @@
                 <div class="screen">
                     <div class="website-tabs">
                         <div class="website-tab active" onclick="showFamilyTree()">Family Tree</div>
-                        <!--<div class="website-tab" onclick="showPrintsForPeace()">Prints for Peace</div>-->
+                        <div class="website-tab" onclick="showProfile()">Profile</div>
                     </div>
                     <div class="screen-content">
                         <!-- Family Tree Website Header -->
@@ -57,7 +110,7 @@
                         </div>
                         
                         <!-- Website Image Container -->
-                        <img src="site-images/ft-home.png" alt="Family Tree Home Page" class="website-image" id="current-image">
+                        <img src="site-images/comp.home.jpeg" alt="Family Tree Home Page" class="website-image" id="current-image">
                     </div>
                 </div>
                 <div class="monitor-stand"></div>
@@ -90,65 +143,21 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Phone -->
-            <!--<div class="phone">
-                <div class="phone-screen">
-                    <div class="phone-content">
-                        <h4 style="text-align: center; margin-bottom: 15px; font-size: 16px;">Mobile View</h4>
-                        phone navigation tabs
-                        <div class="phone-website-tabs">
-                            <div class="phone-website-tab active" onclick="showMobileSite('familytree')">Family Tree</div>
-                            <div class="phone-website-tab" onclick="showMobileSite('printspeace')">Prints for Peace</div>
-                        </div>
-                        
-                        tree navigation
-                        <div class="phone-ft-header" id="phone-ft-header">
-                            <div class="phone-ft-header-title">
-                                <h1 id="phone-ft-page-title" style="margin: 0 0 0.5rem 0; font-size: 1.4rem; font-family: 'gill sans MT', sans-serif; color: #333;">Welcome to our Family Tree!</h1>
-                                <div class="phone-ft-nav">
-                                    <a href="#" onclick="showMobilePage('home')">Home</a>
-                                    <a href="#" onclick="showMobilePage('contributions')">Contributions</a>
-                                    <a href="#" onclick="showMobilePage('history')">History</a>
-                                    <a href="#" onclick="showMobilePage('about')">About</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        prints for peace navigation
-                        <div class="phone-p4p-header" id="phone-p4p-header" style="display: none;">
-                            <div class="phone-p4p-header-title">
-                                <h1 id="phone-p4p-page-title" style="margin: 0 0 0.5rem 0; font-size: 1.4rem; font-family: 'gill sans MT', sans-serif; color: white;">Prints for Peace</h1>
-                                <div class="phone-p4p-nav">
-                                    <a href="#" onclick="showMobileP4PPage('about')">About</a>
-                                    <a href="#" onclick="showMobileP4PPage('gallery')">Gallery</a>
-                                    <a href="#" onclick="showMobileP4PPage('donations')">Donations</a>
-                                    <a href="#" onclick="showMobileP4PPage('cart')">Cart</a>
-                                </div>
-                            </div>
-                        </div>
-                        
-                        <img src="site-images/ft-home.png" alt="Mobile Family Tree" id="mobile-image">
-                    </div>
-                </div>
-            </div>-->
         </div>
     </main>
 
     <footer>
-        <div class="footer-text">
-            <h2>Contact me:</h2> 
-            <a href="mailto:ebutner06@gmail.com" target="_blank">ebutner06@gmail.com</a>
-            <a href="https://www.linkedin.com/in/emma-butner/" target="_blank">LinkedIn</a>
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            <span class="footer-cmd">emma-butner — last commit: 2026</span>
         </div>
     </footer>
 
     <script>
-        // Function to show different pages
+        // Family Tree page switching
         function showPage(page) {
             const title = document.getElementById('ft-page-title');
             const image = document.getElementById('current-image');
-            const mobileImage = document.getElementById('mobile-image');
             const navLinks = document.querySelectorAll('.ft-header-title nav a');
             
             // Reset all nav links
@@ -160,89 +169,79 @@
             // Update based on selected page
             if (page === 'home') {
                 title.textContent = 'Welcome to our Family Tree!';
-                image.src = 'site-images/ft-home.png';
-                mobileImage.src = 'site-images/ft-home.png';
+                image.src = 'site-images/comp.home.jpeg';
                 navLinks[0].style.fontWeight = 'bold';
                 navLinks[0].style.backgroundColor = 'rgba(0,0,0,0.1)';
             } else if (page === 'contributions') {
-                title.textContent = 'Family Contributions';
-                image.src = 'site-images/ft-contributions.png';
-                mobileImage.src = 'site-images/ft-contributionsm.png';
+                title.textContent = 'Contributions to the Family Tree';
+                image.src = 'site-images/comp.contributions.jpeg';
                 navLinks[1].style.fontWeight = 'bold';
                 navLinks[1].style.backgroundColor = 'rgba(0,0,0,0.1)';
             } else if (page === 'history') {
-                title.textContent = 'Family History & Stories';
-                image.src = 'site-images/ft-history.png';
-                mobileImage.src = 'site-images/ft-historym.png';
+                title.textContent = 'History & Stories';
+                image.src = 'site-images/comp.history.jpeg';
                 navLinks[2].style.fontWeight = 'bold';
                 navLinks[2].style.backgroundColor = 'rgba(0,0,0,0.1)';
             } else if (page === 'about') {
-                title.textContent = 'About Our Family';
-                image.src = 'site-images/ft-about.png';
-                mobileImage.src = 'site-images/ft-aboutm.png';
+                title.textContent = 'About this Website';
+                image.src = 'site-images/comp.about.jpeg';
                 navLinks[3].style.fontWeight = 'bold';
                 navLinks[3].style.backgroundColor = 'rgba(0,0,0,0.1)';
             }
             
-            // Scroll to top of screen content
             document.querySelector('.screen-content').scrollTop = 0;
-            showMobilePage(page);
         }
 
-        function showP4PPage(page) {
-            const title = document.getElementById('p4p-page-title');
-            const image = document.getElementById('p4p-current-image');
-            const mobileImage = document.getElementById('mobile-image');
-            const navLinks = document.querySelectorAll('.p4p-header-title nav a');
-            
-            // Reset all nav links
-            navLinks.forEach(link => {
-                link.style.fontWeight = 'normal';
-                link.style.backgroundColor = 'transparent';
-            });
-            
-            // Update based on selected page
-            if (page === 'about') {
-                title.textContent = 'Prints for Peace - About';
-                image.src = 'site-images/about.png';
-                mobileImage.src = 'site-images/about.png';
-                navLinks[0].style.fontWeight = 'bold';
-                navLinks[0].style.backgroundColor = 'rgba(0,0,0,0.1)';
-            } else if (page === 'gallery') {
-                title.textContent = 'Prints for Peace - Gallery';
-                image.src = 'site-images/gallery.png';
-                mobileImage.src = 'site-images/gallery.png';
-                navLinks[1].style.fontWeight = 'bold';
-                navLinks[1].style.backgroundColor = 'rgba(0,0,0,0.1)';
-            } else if (page === 'donations') {
-                title.textContent = 'Prints for Peace - Donations';
-                image.src = 'site-images/donations.png';
-                mobileImage.src = 'site-images/donations.png';
-                navLinks[2].style.fontWeight = 'bold';
-                navLinks[2].style.backgroundColor = 'rgba(0,0,0,0.1)';
-            } else if (page === 'cart') {
-                title.textContent = 'Prints for Peace - Cart';
-                image.src = 'site-images/cart.png';
-                mobileImage.src = 'site-images/cart.png';
-                navLinks[3].style.fontWeight = 'bold';
-                navLinks[3].style.backgroundColor = 'rgba(0,0,0,0.1)';
-            }
-            
-            // Sync with phone navigation
-            showMobileP4PPage(page);
-        }
-
-        function showFamilyTree() {
+        // Profile (Jade Butner) - embedded website
+        function showProfile() {
             const screenContent = document.querySelector('.screen-content');
             const tabs = document.querySelectorAll('.website-tab');
             
             // Update active tab
+            tabs[0].classList.remove('active');
+            tabs[1].classList.add('active');
+            
+            // Embed the Jade Butner website
+            screenContent.innerHTML = `
+                <div class="profile-header">
+                    <div class="profile-header-title">
+                        <a href="https://jadebutner.github.io/index.html" class="contact-link" target="_blank">Website Link</a>
+
+                    </div>
+                </div>
+                <iframe src="https://jadebutner.github.io/productions.html" class="website-iframe" title="Jade Butner Productions"></iframe>
+            `;
+        }
+
+        function showProfilePage(page) {
+            const iframe = document.querySelector('.website-iframe');
+            const navLinks = document.querySelectorAll('.profile-header-title nav a');
+            
+            if (navLinks.length > 0) {
+                navLinks.forEach(link => {
+                    link.style.fontWeight = 'normal';
+                    link.style.backgroundColor = 'transparent';
+                });
+            }
+            
+            if (page === 'about') {
+                if (navLinks[0]) navLinks[0].style.fontWeight = 'bold';
+                if (iframe) iframe.src = 'https://jadebutner.github.io/';
+            } else if (page === 'productions') {
+                if (navLinks[1]) navLinks[1].style.fontWeight = 'bold';
+                if (iframe) iframe.src = 'https://jadebutner.github.io/productions.html';
+            }
+        }
+
+        // Tab switching functions
+        function showFamilyTree() {
+            const screenContent = document.querySelector('.screen-content');
+            const tabs = document.querySelectorAll('.website-tab');
+            
             tabs[0].classList.add('active');
             tabs[1].classList.remove('active');
             
-            // Restore Family Tree content
             screenContent.innerHTML = `
-                <!-- Family Tree Website Header -->
                 <div class="ft-header">
                     <div class="ft-header-title">
                         <h1 id="ft-page-title">Welcome to our Family Tree!</h1>
@@ -254,128 +253,33 @@
                         </nav>
                     </div>
                 </div>
-                
-                <!-- Website Image Container -->
-                <img src="site-images/ft-home.png" alt="Family Tree Home Page" class="website-image" id="current-image">
+                <img src="site-images/comp.home.jpeg" alt="Family Tree Home Page" class="website-image" id="current-image">
             `;
-            
-            // Also update phone image
-            document.getElementById('mobile-image').src = 'site-images/ft-home.png';
-            
-            // Sync phone navigation
-            showMobileSite('familytree');
         }
 
-        function showPrintsForPeace() {
-            const screenContent = document.querySelector('.screen-content');
-            const tabs = document.querySelectorAll('.website-tab');
-            
-            // Update active tab
-            tabs[0].classList.remove('active');
-            tabs[1].classList.add('active');
-            
-            // Update the website content
-            screenContent.innerHTML = `
-                <!-- Prints for Peace Website Header -->
-                <div class="p4p-header">
-                    <div class="p4p-header-title">
-                        <h1 id="p4p-page-title">Prints for Peace</h1>
-                        <nav>
-                            <a href="#" onclick="showP4PPage('about')">About</a>
-                            <a href="#" onclick="showP4PPage('gallery')">Gallery</a>
-                            <a href="#" onclick="showP4PPage('donations')">Donations</a>
-                            <a href="#" onclick="showP4PPage('cart')">Cart</a>
-                        </nav>
-                    </div>
-                </div>
-                
-                <!-- Website Image Container -->
-                <img src="site-images/about.png" alt="Prints for Peace" class="website-image" id="p4p-current-image">
-            `;
-            
-            // Also update phone image
-            document.getElementById('mobile-image').src = 'site-images/about.png';
-            
-            // Sync phone navigation
-            showMobileSite('printspeace');
+        // Theme Toggle with localStorage persistence
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Check saved preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.body.classList.remove('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
         }
 
-        // Mobile navigation functions
-        function showMobileSite(site) {
-            const phoneTabs = document.querySelectorAll('.phone-website-tab');
-            const familytreeNav = document.getElementById('phone-ft-header');
-            const printspeaceNav = document.getElementById('phone-p4p-header');
-            
-            // Update active tab
-            phoneTabs[0].classList.remove('active');
-            phoneTabs[1].classList.remove('active');
-            
-            if (site === 'familytree') {
-                phoneTabs[0].classList.add('active');
-                phoneFtHeader.style.display = 'flex';
-                phoneP4PHeader.style.display = 'none';
+        themeToggle.addEventListener('click', function() {
+            const isLight = document.body.classList.toggle('light-theme');
+            if (isLight) {
+                this.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
             } else {
-                phoneTabs[1].classList.add('active');
-                phoneFtHeader.style.display = 'none';
-                phoneP4PHeader.style.display = 'flex';
+                this.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
             }
-        }
-
-        function showMobilePage(page) {
-            const mobileImage = document.getElementById('mobile-image');
-            const phoneTitle = document.getElementById('phone-ft-page-title');
-            const mobileLinks = document.querySelectorAll('.phone-ft-nav a');
-            
-            // Update active link
-            mobileLinks.forEach(link => link.classList.remove('active'));
-            
-            // Update image and active state
-            if (page === 'home') {
-                phoneTitle.textContent = 'Welcome to our Family Tree!';
-                mobileImage.src = 'site-images/ft-home.png';
-                mobileLinks[0].classList.add('active');
-            } else if (page === 'contributions') {
-                phoneTitle.textContent = 'Family Contributions';
-                mobileImage.src = 'site-images/ft-contributionsm.png';
-                mobileLinks[1].classList.add('active');
-            } else if (page === 'history') {
-                phoneTitle.textContent = 'Family History & Stories';
-                mobileImage.src = 'site-images/ft-historym.png';
-                mobileLinks[2].classList.add('active');
-            } else if (page === 'about') {
-                phoneTitle.textContent = 'About our Family';
-                mobileImage.src = 'site-images/ft-aboutm.png';
-                mobileLinks[3].classList.add('active');
-            }
-        }
-
-        function showMobileP4PPage(page) {
-            const mobileImage = document.getElementById('mobile-image');
-            const phoneTitle = document.getElementById('phone-p4p-page-title');
-            const mobileLinks = document.querySelectorAll('.phone-p4p-nav a');
-            
-            // Update active link
-            mobileLinks.forEach(link => link.classList.remove('active'));
-            
-            // Update image and active state
-            if (page === 'about') {
-                phoneTitle.textContent = 'About Page';
-                mobileImage.src = 'site-images/about.png';
-                mobileLinks[0].classList.add('active');
-            } else if (page === 'gallery') {
-                phoneTitle.textContent = 'Gallery';
-                mobileImage.src = 'site-images/gallery.png';
-                mobileLinks[1].classList.add('active');
-            } else if (page === 'donations') {
-                phoneTitle.textContent = 'Donations';
-                mobileImage.src = 'site-images/donations.png';
-                mobileLinks[2].classList.add('active');
-            } else if (page === 'cart') {
-                phoneTitle.textContent = 'Cart';
-                mobileImage.src = 'site-images/cart.png';
-                mobileLinks[3].classList.add('active');
-            }
-        }
+        });
     </script>
 </body>
 </html>

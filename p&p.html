@@ -3,517 +3,265 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Posters & Publications</title>
+    <title>Emma Butner | Publications & Posters</title>
     <link rel="stylesheet" href="home.css">
-    <style>
-        /* Search bar for posters */
-        .poster-search-container {
-            max-width: 1000px;
-            margin: 20px auto;
-            padding: 0 20px;
-        }
-
-        #poster-search {
-            width: 100%;
-            padding: 12px 20px;
-            font-size: 1rem;
-            border: 2px solid #D9D3C6;
-            border-radius: 8px;
-            outline: none;
-            transition: border-color 0.3s ease;
-        }
-
-        #poster-search:focus {
-            border-color: #788978;
-        }
-
-        .poster-no-results {
-            text-align: center;
-            padding: 40px;
-            color: #788978;
-            font-style: italic;
-            display: none;
-        }
-
-        .papers-container {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 30px;
-            margin-bottom: 40px;
-        }
-        
-        .paper-column {
-            display: flex;
-            flex-direction: column;
-        }
-        
-        .google-scholar-link {
-            display: inline-block;
-            margin-bottom: 20px;
-            padding: 8px 16px;
-            background-color: #788978;
-            color: white;
-            text-decoration: none;
-            border-radius: 4px;
-            font-weight: bold;
-            transition: background-color 0.3s;
-        }
-        
-        .google-scholar-link:hover {
-            background-color: #2F362F;
-        }
-        
-        .publication {
-            margin-bottom: 25px;
-            cursor: pointer;
-            padding: 15px;
-            border-radius: 5px;
-            transition: background-color 0.3s;
-        }
-        
-        .publication:hover {
-            background-color: #f5f5f5;
-        }
-        
-        .publication .title {
-            font-weight: bold;
-            margin: 8px 0;
-        }
-        
-        .publication .authors {
-            color: #555;
-        }
-        
-        .publication .journal {
-            font-style: italic;
-            color: #777;
-        }
-        
-        /* Poster Gallery */
-        .poster-gallery {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 25px;
-            margin-top: 20px;
-        }
-
-        .poster-card {
-            background: #2F362F;
-            color: white;
-            padding: 25px;
-            border-radius: 10px;
-            cursor: pointer;
-            transition: transform 0.3s ease, box-shadow 0.3s ease;
-            display: flex;
-            flex-direction: column;
-            justify-content: center;
-            min-height: 200px;
-        }
-
-        .poster-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
-        }
-
-        .poster-info {
-            text-align: center;
-        }
-
-        .poster-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            color: #D9D3C6;
-        }
-
-        .poster-authors {
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .poster-conference {
-            color: #788978;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .poster-year {
-            color: #ccc;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        /* Buttons for both front and back */
-        .zoom-btn, .flip-btn {
-            position: absolute;
-            background: rgba(0,0,0,0.7);
-            color: white;
-            border: none;
-            border-radius: 50%;
-            width: 36px;
-            height: 36px;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 2;
-            opacity: 0;
-            transition: opacity 0.3s, background 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .poster-front:hover .zoom-btn,
-        .poster-front:hover .flip-btn,
-        .poster-back:hover .zoom-btn,
-        .poster-back:hover .flip-btn {
-            opacity: 1;
-        }
-
-        .zoom-btn:hover, .flip-btn:hover {
-            background: rgba(120, 137, 120, 0.9);
-        }
-
-        /* Front side buttons */
-        .poster-front .zoom-btn {
-            top: 10px;
-            right: 10px;
-        }
-
-        .poster-front .flip-btn {
-            bottom: 10px;
-            right: 10px;
-        }
-
-        /* Back side buttons */
-        .poster-back .zoom-btn {
-            top: 10px;
-            right: 10px;
-        }
-
-        .poster-back .flip-btn {
-            bottom: 10px;
-            right: 10px;
-        }
-
-        .poster-details {
-            max-height: 100%;
-            overflow-y: auto;
-            padding-right: 10px;
-        }
-
-        .poster-title {
-            font-weight: bold;
-            margin-bottom: 15px;
-            font-size: 1.1rem;
-            color: #D9D3C6;
-        }
-
-        .poster-authors {
-            font-size: 0.95rem;
-            margin-bottom: 12px;
-            color: #fff;
-        }
-
-        .poster-conference {
-            color: #788978;
-            font-size: 0.95rem;
-            margin-bottom: 8px;
-            font-weight: bold;
-        }
-
-        .poster-year {
-            color: #ccc;
-            font-size: 0.9rem;
-            margin-top: 10px;
-        }
-
-        .presenting-badge {
-            display: inline-block;
-            background-color: #e74c3c;
-            color: white;
-            padding: 2px 8px;
-            border-radius: 12px;
-            font-size: 0.8rem;
-            margin-right: 5px;
-            font-weight: bold;
-        }
-
-        /* Modal Styles */
-        .modal {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0,0,0,0.95);
-            z-index: 1000;
-            align-items: center;
-            justify-content: center;
-            padding: 20px;
-        }
-
-        .modal-content {
-            background: white;
-            padding: 30px;
-            border-radius: 10px;
-            max-width: 90%;
-            max-height: 90vh;
-            overflow: auto;
-            position: relative;
-        }
-
-        .close-modal {
-            position: absolute;
-            top: 15px;
-            right: 20px;
-            font-size: 32px;
-            cursor: pointer;
-            color: #333;
-            transition: color 0.3s;
-        }
-
-        .close-modal:hover {
-            color: #e74c3c;
-        }
-
-        /* Zoom controls for poster modal */
-        .zoom-controls {
-            position: absolute;
-            bottom: 20px;
-            right: 20px;
-            display: flex;
-            gap: 10px;
-            z-index: 5;
-        }
-
-        .zoom-controls button {
-            background: rgba(120, 137, 120, 0.8);
-            color: white;
-            border: none;
-            width: 40px;
-            height: 40px;
-            border-radius: 50%;
-            font-size: 20px;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .zoom-controls button:hover {
-            background: #2F362F;
-            transform: scale(1.1);
-        }
-
-        #modal-poster-image {
-            max-width: 100%;
-            max-height: 70vh;
-            transition: transform 0.3s;
-            display: block;
-            margin: 0 auto;
-        }
-
-        @media (max-width: 768px) {
-            .papers-container {
-                grid-template-columns: 1fr;
-            }
-            
-            .poster-gallery {
-                grid-template-columns: 1fr;
-            }
-            
-            .poster-card {
-                height: 400px;
-            }
-            
-            .zoom-btn, .flip-btn {
-                opacity: 1;
-                background: rgba(0,0,0,0.5);
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
 <body>
+    <div class="terminal-bar">
+        <span class="terminal-dot red"></span>
+        <span class="terminal-dot yellow"></span>
+        <span class="terminal-dot green"></span>
+        <span class="terminal-path">emma-butner/publications</span>
+        <span class="cursor">_</span>
+    </div>
+
     <header>
-        <h1>Posters & Publications</h1>
+        <h1>EMMA BUTNER</h1>
+        <div class="theme-toggle-container">
+            <button class="theme-toggle-btn" id="theme-toggle" aria-label="Toggle theme">
+                <i class="fas fa-sun"></i>
+            </button>
+        </div>
         <nav>
-            <a href="index.html">Home</a>
-            <a href="aboutme.html">About Me</a>
-            <a href="websites.html">Websites</a>
-            <a href="experiment.html">Projects</a>
-            <a href="p&p.html">Posters & Publications</a>
+            <a href="index.html">~/home</a>
+            <a href="aboutme.html">~/about</a>
+            <a href="websites.html">~/websites</a>
+            <a href="experiment.html">~/projects</a>
+            <a href="p&p.html">~/publications</a>
         </nav>
     </header>
 
     <main>
-            <div class="papers-container">
+        <div class="section-header">
+            <span class="section-prompt">$ publications</span>
+            <span class="section-line"></span>
+        </div>
+
+        <!-- Papers Grid -->
+        <div class="papers-container">
             <!-- Published Papers Column -->
             <div class="paper-column">
-                <h2>Published Papers</h2>
+                <div class="column-header">
+                    <span class="column-prompt">📄</span>
+                    <span class="column-title">published</span>
+                </div>
                 <a href="https://scholar.google.com/citations?hl=en&user=gz7_oeMAAAAJ" class="google-scholar-link" target="_blank">
-                    View on Google Scholar
+                    <i class="fab fa-google"></i> google-scholar
                 </a>
                 
-                <div class="publication" onclick="openAbstractModal()">
-                    <div class="authors">Kilshaw, R. E., Boggins, A., Everett, O., <strong>Butner, E.</strong>, Leifker, F. R., & Baucom, B. R.</div>
-                    <div class="year">(2024)</div>
-                    <div class="title">Benchmarking Mental Health Status Using Passive Sensor Data: Protocol for a Prospective Observational Study.</div>
-                    <div class="journal">JMIR Research Protocols, 13(1), e53857.</div>
-                    <em>Click to see the abstract.</em>
-                    <br><strong><em>Project:</em></strong> Digital Phenotyping Dataset
+                <div class="publication" onclick="openAbstractModal('abstract-modal')">
+                    <div class="pub-year">2024</div>
+                    <div class="pub-title">Benchmarking Mental Health Status Using Passive Sensor Data: Protocol for a Prospective Observational Study</div>
+                    <div class="pub-authors">Kilshaw, R. E., Boggins, A., Everett, O., <strong>Butner, E.</strong>, Leifker, F. R., & Baucom, B. R.</div>
+                    <div class="pub-journal">JMIR Research Protocols, 13(1), e53857</div>
+                    <div class="pub-project">📁 Digital Phenotyping Dataset</div>
+                    <div class="pub-click-hint">click to view abstract →</div>
+                </div>
+
+                <div class="publication" onclick="openAbstractModal('abstract-modal1')">
+                    <div class="pub-year">2026</div>
+                    <div class="pub-title">Let's get the ball rolling: Implementing the use of immersive virtual reality in space and time perceptual estimates</div>
+                    <div class="pub-authors">Detrich, A., <strong>Butner, E.</strong>, Creem-Regehr, S. H., Stefanucci, J. K.</div>
+                    <div class="pub-journal">In Proceedings of the 2026 ACM Symposium on Applied Perception</div>
+                    <div class="pub-project">📁 STEP VR Project</div>
+                    <div class="pub-click-hint">click to view abstract →</div>
                 </div>
             </div>
-            
+
             <!-- In Preparation Column -->
             <div class="paper-column">
-                <h2>In Preparation</h2>
-                
-                <div class="publication">
-                    <div class="authors">Detrich, A., <strong>Butner, E.</strong>, Creem-Regher, S. H., Stefanucci, J. K.</div>
-                    <div class="year">(in preparation)</div>
-                    <div class="title">Let's get the ball rolling: Implementing the use of immersive virtual reality in space and time perceptual estimates.</div>
-                    <strong><em>Project:</em></strong> STEP VR Project
-                </div>
-                
-                <div class="publication">
-                    <div class="authors">Frohe, T., <strong>Butner, E.</strong>, Kolde, S., Bhambu, P., Leemon, G., Taylor, E. M., David, A., Eikeng, I., Hu, S., Wu, Y., Zhao, M., Seo, G., Hamdy, N. W., Cohn, E. B., Clifasefi, S. L., & Collins, S. E.</div>
-                    <div class="year">(in preparation)</div>
-                    <div class="title">Conventional content analysis of Housing First residents' preferred activities and service needs during the COVID-19 pandemic.</div>
-                    <strong><em>Project:</em></strong> Staying in Touch and Engaged Project (STEP)
+                <div class="column-header">
+                    <span class="column-prompt">✎</span>
+                    <span class="column-title">in preparation</span>
                 </div>
 
                 <div class="publication">
-                    <div class="authors">Kilshaw, R. E., <strong>Butner, E.</strong>, Butner, J. E., Boggins, A., Leifker, F. R., de Lacy, N., Baucom, B. R. W.</div>
-                    <div class="year">(in preparation)</div>
-                    <div class="title">Using Smartphone Passive Sensor Data to Enhance Mental Health Risk Assessment in Community-Dwelling Adults.</div>
-                    <strong><em>Project:</em></strong> Digital Phenotyping Dataset (Methods paper)
+                    <div class="pub-year">in prep</div>
+                    <div class="pub-title">The Co-Adaptation of Space and Time Perception Through Locomotor Recalibration</div>
+                    <div class="pub-authors"><strong>Butner, E.</strong>, Ross, M., Creem-Regehr, S. H., Stefanucci, J. K.</div>
+                    <div class="pub-project">📁 Recalibration of Space and Time</div>
                 </div>
 
                 <div class="publication">
-                    <div class="authors">Frohe, T., <strong>Butner, E.</strong>, Taylor, E. M., Yu, A., Shinagawa, E., Siegel, A., Nguyen, H., Kolde, S., Bhambu, P., Childs, T., Davis, A., Collins, S. E., & Clifasefi, S. L. </div>
-                    <div class="year">(in preparation)</div>
-                    <div class="title">Connecting Housing First To Digital Health: Insights From Residents On Technology And Harm Reduction</div>
-                    <strong><em>Project:</em></strong> STaHR project <em>(not on projects page: I only helped with the paper)</em>
+                    <div class="pub-year">in prep</div>
+                    <div class="pub-title">Using Smartphone Passive Sensor Data to Enhance Mental Health Risk Assessment in Community-Dwelling Adults</div>
+                    <div class="pub-authors">Kilshaw, R. E., <strong>Butner, E.</strong>, Butner, J. E., Boggins, A., Leifker, F. R., de Lacy, N., Baucom, B. R. W.</div>
+                    <div class="pub-project">📁 Digital Phenotyping Dataset</div>
+                </div>
+
+                <button class="toggle-papers" onclick="togglePapers()">show all →</button>
+                <div class="extra-papers" style="display: none;">
+                    <div class="publication">
+                        <div class="pub-year">in prep</div>
+                        <div class="pub-title">Connecting Housing First To Digital Health: Insights From Residents On Technology And Harm Reduction</div>
+                        <div class="pub-authors">Frohe, T., <strong>Butner, E.</strong>, Taylor, E. M., Yu, A., Shinagawa, E., ... & Clifasefi, S. L.</div>
+                        <div class="pub-project">📁 STaHR Project</div>
+                    </div>
+
+                    <div class="publication">
+                        <div class="pub-year">in prep</div>
+                        <div class="pub-title">Conventional content analysis of Housing First residents' preferred activities and service needs during the COVID-19 pandemic</div>
+                        <div class="pub-authors">Frohe, T., <strong>Butner, E.</strong>, Kolde, S., Bhambu, P., Leemon, G., Taylor, E. M., ... & Collins, S. E.</div>
+                        <div class="pub-project">📁 STEP Project</div>
+                    </div>
                 </div>
             </div>
         </div>
-
-        <section class="section conference">
-            <h2>Conference Posters</h2>
-            <p><em><span class="presenting-badge">+</span> indicates presenting author</em></p>
-            <div class="poster-search-container">
-                <input type="text" id="poster-search" placeholder="Search bar">
-            </div>
-            <div id="poster-no-results" class="poster-no-results">No matching posters found. Try a different search term.</div>
             
-            <div class="poster-gallery">
-                <!-- Poster 1 -->
-                <div class="poster-card" data-poster-index="0">
-                    <div class="poster-info">
-                        <div class="poster-title">Investigating the Utility of Smartphone Passive Sensor Data for Predicting Mental Health Risk in Community Dwelling Adults</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> Kilshaw, R.E., <strong>Butner, E.</strong>, Boggins, A., Leifker, F. R., Baucom, B. R. W.</div>
-                        <div class="poster-conference">ABCT Technology and Behavior Change SIG</div>
-                        <div class="poster-year">May 2025</div>
-                    </div>
-                </div>
+        <!-- Conference Posters Section -->
+        <div class="section-header">
+            <span class="section-prompt">$ posters</span>
+            <span class="section-line"></span>
+        </div>
 
-                <!-- Poster 2 -->
-                <div class="poster-card" data-poster-index="1">
-                    <div class="poster-info">
-                        <div class="poster-title">Effects of Perceptual-Motor Recalibration on Time Perception in Virtual Reality</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Stefanucci, J. K., Creem-Regehr, S. H.</div>
-                        <div class="poster-conference">University of Utah Research Day</div>
-                        <div class="poster-year">April 2025</div>
-                    </div>
-                </div>
+        <div class="poster-search-container">
+            <input type="text" id="poster-search" placeholder="🔍 search posters...">
+        </div>
+        <div id="poster-no-results" class="poster-no-results">
+            <span class="no-results-prompt">No matching posters found. Try a different search term.</span>
+        </div>
 
-                <!-- Poster 3 -->
-                <div class="poster-card" data-poster-index="2">
-                    <div class="poster-info">
-                        <div class="poster-title">Let's get the ball rolling: Implementing immersive VR in space and time perceptual estimates</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> Detrich, A., <strong>Butner, E.</strong>, Kuper, K., Ruiz, D., Stefanucci, J. K., Creem-Regehr, S. H.</div>
-                        <div class="poster-conference">University of Utah Research Day</div>
-                        <div class="poster-year">April 2025</div>
-                    </div>
-                </div>
-
-                <!-- Poster 4 -->
-                <div class="poster-card" data-poster-index="3">
-                    <div class="poster-info">
-                        <div class="poster-title">Let's get the ball rolling: Implementing immersive VR in space and time perceptual estimates</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> Detrich, A., Whitaker, M., <strong>Butner, E.</strong>, Stefanucci, J. K., Creem-Regehr, S. H.</div>
-                        <div class="poster-conference">Psychonomic Society</div>
-                        <div class="poster-year">November 2024</div>
-                    </div>
-                </div>
-
-                <!-- Poster 5 -->
-                <div class="poster-card" data-poster-index="4">
-                    <div class="poster-info">
-                        <div class="poster-title">Using Passive Sensor Data to Enhance Mental Health Risk Assessment in Community-Dwelling Adults</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> Kilshaw, R. E., <strong>Butner, E.</strong>, Boggins, A., Everett, O., Leifker, F. R., Baucom, B. R. W.</div>
-                        <div class="poster-conference">APS Annual Convention</div>
-                        <div class="poster-year">May 2024</div>
-                    </div>
-                </div>
-
-                <!-- Poster 6 -->
-                <div class="poster-card" data-poster-index="5">
-                    <div class="poster-info">
-                        <div class="poster-title">Avoiding the scream-ic route: navigational biases in dynamic threat environments</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> Detrich, A., <strong>Butner, E.</strong>, Creem-Regehr, S. H., Stefanucci, J. K.</div>
-                        <div class="poster-conference">Society for Affective Science</div>
-                        <div class="poster-year">March 2024</div>
-                    </div>
-                </div>
-
-                <!-- Poster 7 -->
-                <div class="poster-card" data-poster-index="6">
-                    <div class="poster-info">
-                        <div class="poster-title">Emotional Correlations During Observation of a Traumatic Event</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Ferguson, Z.E., Kaiser, C.</div>
-                        <div class="poster-conference">UW Undergraduate Research Symposium</div>
-                        <div class="poster-year">May 2023</div>
-                    </div>
-                </div>
-
-                <!-- Poster 8 -->
-                <div class="poster-card" data-poster-index="7">
-                    <div class="poster-info">
-                        <div class="poster-title">Emotion Correlations Underlying an Adverse Event</div>
-                        <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong></div>
-                        <div class="poster-conference">Western Psychological Association</div>
-                        <div class="poster-year">April 2023</div>
-                    </div>
-                </div>
+        <div class="poster-gallery">
+        <!-- Poster 1 -->
+        <div class="poster-card" data-poster-index="0">
+            <div class="poster-info">
+                <div class="poster-title">Effects of Perceptual-Motor Recalibration on Space and Time Perception in Virtual Reality</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Ross, M., Stefanucci, J. K., Creem-Regehr, S. H.</div>
+                <div class="poster-conference">Psychonomic Society</div>
+                <div class="poster-year">November 2026</div>
+                <div class="pub-project">📁 Recalibration of Space and Time</div>
+                <div class="poster-conference">Awarded $750 from the Psychonomic Society 2026 Graduate Travel Awards</div>
             </div>
-        </section>
+        </div>
+        
+        <div class="poster-card" data-poster-index="1">
+            <div class="poster-info">
+                <div class="poster-title">Effects of Perceptual-Motor Recalibration on Space and Time Perception in Virtual Reality</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Ross, M., Stefanucci, J. K., Creem-Regehr, S. H.</div>
+                <div class="poster-conference">University of Utah CSBS Research Day</div>
+                <div class="poster-year">April 2026</div>
+                <div class="pub-project">📁 Recalibration of Space and Time</div>
+            </div>
+        </div>
+
+        <!-- Poster 2 -->
+        <div class="poster-card" data-poster-index="2">
+            <div class="poster-info">
+                <div class="poster-title">Investigating the Utility of Smartphone Passive Sensor Data for Predicting Mental Health Risk in Community Dwelling Adults</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> Kilshaw, R.E., <strong>Butner, E.</strong>, Boggins, A., Leifker, F. R., Baucom, B. R. W.</div>
+                <div class="poster-conference">ABCT Technology and Behavior Change SIG</div>
+                <div class="poster-year">May 2025</div>
+                <div class="pub-project">📁 Digital Phenotyping Dataset</div>
+            </div>
+        </div>
+
+        <!-- Poster 3 -->
+        <div class="poster-card" data-poster-index="3">
+            <div class="poster-info">
+                <div class="poster-title">Effects of Perceptual-Motor Recalibration on Time Perception in Virtual Reality</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Stefanucci, J. K., Creem-Regehr, S. H.</div>
+                <div class="poster-conference">University of Utah Research Day</div>
+                <div class="poster-year">April 2025</div>
+                <div class="pub-project">📁 Recalibration of Space and Time</div>
+            </div>
+        </div>
+
+        <!-- Poster 4 -->
+        <div class="poster-card" data-poster-index="4">
+            <div class="poster-info">
+                <div class="poster-title">Let's get the ball rolling: Implementing immersive VR in space and time perceptual estimates</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> Detrich, A., <strong>Butner, E.</strong>, Kuper, K., Ruiz, D., Stefanucci, J. K., Creem-Regehr, S. H.</div>
+                <div class="poster-conference">University of Utah Research Day</div>
+                <div class="poster-year">April 2025</div>
+                <div class="pub-project">📁 STEP VR Project</div>
+            </div>
+        </div>
+
+        <!-- Poster 5 -->
+        <div class="poster-card" data-poster-index="5">
+            <div class="poster-info">
+                <div class="poster-title">Let's get the ball rolling: Implementing immersive VR in space and time perceptual estimates</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> Detrich, A., Whitaker, M., <strong>Butner, E.</strong>, Stefanucci, J. K., Creem-Regehr, S. H.</div>
+                <div class="poster-conference">Psychonomic Society</div>
+                <div class="poster-year">November 2024</div>
+                <div class="pub-project">📁 STEP VR Project</div>
+            </div>
+        </div>
+
+        <!-- Poster 6 -->
+        <div class="poster-card" data-poster-index="6">
+            <div class="poster-info">
+                <div class="poster-title">Using Passive Sensor Data to Enhance Mental Health Risk Assessment in Community-Dwelling Adults</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> Kilshaw, R. E., <strong>Butner, E.</strong>, Boggins, A., Everett, O., Leifker, F. R., Baucom, B. R. W.</div>
+                <div class="poster-conference">APS Annual Convention</div>
+                <div class="poster-year">May 2024</div>
+                <div class="pub-project">📁 Digital Phenotyping Dataset</div>
+            </div>
+        </div>
+
+        <!-- Poster 7 -->
+        <div class="poster-card" data-poster-index="7">
+            <div class="poster-info">
+                <div class="poster-title">Avoiding the scream-ic route: navigational biases in dynamic threat environments</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> Detrich, A., <strong>Butner, E.</strong>, Creem-Regehr, S. H., Stefanucci, J. K.</div>
+                <div class="poster-conference">Society for Affective Science</div>
+                <div class="poster-year">March 2024</div>
+            </div>
+        </div>
+
+        <!-- Poster 8 -->
+        <div class="poster-card" data-poster-index="8">
+            <div class="poster-info">
+                <div class="poster-title">Emotional Correlations During Observation of a Traumatic Event</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Ferguson, Z.E., Kaiser, C.</div>
+                <div class="poster-conference">UW Undergraduate Research Symposium</div>
+                <div class="poster-year">May 2023</div>
+                <div class="pub-project">📁 Understanding Intersectional Identities</div>
+            </div>
+        </div>
+
+        <!-- Poster 9 -->
+        <div class="poster-card" data-poster-index="9">
+            <div class="poster-info">
+                <div class="poster-title">Emotion Correlations Underlying an Adverse Event</div>
+                <div class="poster-authors"><span class="presenting-badge">+</span> <strong>Butner, E.</strong></div>
+                <div class="poster-conference">Western Psychological Association</div>
+                <div class="poster-year">April 2023</div>
+                <div class="pub-project">📁 Understanding Intersectional Identities</div>
+            </div>
+        </div>
+    </div>
     </main>
 
     <!-- Abstract Modal -->
     <div id="abstract-modal" class="modal">
         <div class="modal-content">
-            <span class="close-modal" onclick="closeAbstractModal()">&times;</span>
-            <h2>Benchmarking Mental Health Status Using Passive Sensor Data: Protocol for a Prospective Observational Study</h2>
-            <h3>Abstract</h3>
-            <p><strong>Background:</strong><br>
-            Computational psychiatry has the potential to advance the diagnosis, mechanistic understanding, and treatment of mental health conditions. Promising results from clinical samples have led to calls to extend these methods to mental health risk assessment in the general public; however, data typically used with clinical samples are neither available nor scalable for research in the general population. Digital phenotyping addresses this by capitalizing on the multimodal and widely available data created by sensors embedded in personal digital devices (eg, smartphones) and is a promising approach to extending computational psychiatry methods to improve mental health risk assessment in the general population.</p>
-            
-            <p><strong>Objective:</strong><br>
-            Building on recommendations from existing computational psychiatry and digital phenotyping work, we aim to create the first computational psychiatry data set that is tailored to studying mental health risk in the general population; includes multimodal, sensor-based behavioral features; and is designed to be widely shared across academia, industry, and government using gold standard methods for privacy, confidentiality, and data integrity.</p>
-            
-            <p><strong>Methods:</strong><br>
-            We are using a stratified, random sampling design with 2 crossed factors (difficulties with emotion regulation and perceived life stress) to recruit a sample of 400 community-dwelling adults balanced across high- and low-risk for episodic mental health conditions. Participants first complete self-report questionnaires assessing current and lifetime psychiatric and medical diagnoses and treatment, and current psychosocial functioning. Participants then complete a 7-day in situ data collection phase that includes providing daily audio recordings, passive sensor data collected from smartphones, self-reports of daily mood and significant events, and a verbal description of the significant daily events during a nightly phone call. Participants complete the same baseline questionnaires 6 and 12 months after this phase. Self-report questionnaires will be scored using standard methods. Raw audio and passive sensor data will be processed to create a suite of daily summary features (eg, time spent at home).</p>
-            
-            <p><strong>Results:</strong><br>
-            Data collection began in June 2022 and is expected to conclude by July 2024. To date, 310 participants have consented to the study; 149 have completed the baseline questionnaire and 7-day intensive data collection phase; and 61 and 31 have completed the 6- and 12-month follow-up questionnaires, respectively. Once completed, the proposed data set will be made available to academic researchers, industry, and the government using a stepped approach to maximize data privacy.</p>
-            
-            <p><strong>Conclusions:</strong><br>
-            This data set is designed as a complementary approach to current computational psychiatry and digital phenotyping research, with the goal of advancing mental health risk assessment within the general population. This data set aims to support the field's move away from siloed research laboratories collecting proprietary data and toward interdisciplinary collaborations that incorporate clinical, technical, and quantitative expertise at all stages of the research process.</p>
+            <span class="close-modal" onclick="closeAbstractModal('abstract-modal')">&times;</span>
+            <h2>Benchmarking Mental Health Status Using Passive Sensor Data</h2>
+            <h3>Protocol for a Prospective Observational Study</h3>
+            <div class="abstract-text">
+                <p><strong>Background:</strong> Computational psychiatry has the potential to advance the diagnosis, mechanistic understanding, and treatment of mental health conditions. Promising results from clinical samples have led to calls to extend these methods to mental health risk assessment in the general public; however, data typically used with clinical samples are neither available nor scalable for research in the general population. Digital phenotyping addresses this by capitalizing on the multimodal and widely available data created by sensors embedded in personal digital devices (e.g., smartphones) and is a promising approach to extending computational psychiatry methods to improve mental health risk assessment in the general population.</p>
+                
+                <p><strong>Objective:</strong> Building on recommendations from existing computational psychiatry and digital phenotyping work, we aim to create the first computational psychiatry data set that is tailored to studying mental health risk in the general population; includes multimodal, sensor-based behavioral features; and is designed to be widely shared across academia, industry, and government using gold standard methods for privacy, confidentiality, and data integrity.</p>
+                
+                <p><strong>Methods:</strong> We are using a stratified, random sampling design with 2 crossed factors (difficulties with emotion regulation and perceived life stress) to recruit a sample of 400 community-dwelling adults balanced across high- and low-risk for episodic mental health conditions. Participants first complete self-report questionnaires assessing current and lifetime psychiatric and medical diagnoses and treatment, and current psychosocial functioning. Participants then complete a 7-day in situ data collection phase that includes providing daily audio recordings, passive sensor data collected from smartphones, self-reports of daily mood and significant events, and a verbal description of the significant daily events during a nightly phone call.</p>
+                
+                <p><strong>Results:</strong> Data collection began in June 2022 and is expected to conclude by July 2024. To date, 310 participants have consented to the study; 149 have completed the baseline questionnaire and 7-day intensive data collection phase.</p>
+                
+                <p><strong>Conclusions:</strong> This data set is designed as a complementary approach to current computational psychiatry and digital phenotyping research, with the goal of advancing mental health risk assessment within the general population.</p>
+            </div>
+        </div>
+    </div>
+
+    <div id="abstract-modal1" class="modal">
+        <div class="modal-content">
+            <span class="close-modal" onclick="closeAbstractModal('abstract-modal1')">&times;</span>
+            <h2>Let's get the ball rolling</h2>
+            <h3>Implementing the use of immersive virtual reality in space and time perceptual estimates</h3>
+            <div class="abstract-text">
+                <p>Coordinating spatial and temporal judgments is essential for everyday behavior, yet it remains debated whether estimates of these dimensions rely on a shared magnitude system or if space more strongly influences time. This study examined space-time perception in immersive virtual reality (VR), which reduces fixed spatial references and better approximates real-world conditions than desktop paradigms. Participants completed a reproduction task, estimating either the duration or displacement of a moving object in a virtual environment. Results showed a small but reliable bidirectional interaction: spatial and temporal estimates influenced each other, but accounted for only modest variance, consistent with prior findings. Immersive VR did not strengthen these effects, suggesting that space-time interactions generalize across environments rather than increasing with realism. Despite some methodological noise, the pattern remained stable. Overall, space-time interactions in VR appear modest, bidirectional, and robust, supporting VR as a useful platform for studying perceptual integration in realistic contexts.</p>
+            </div>
         </div>
     </div>
 
@@ -529,7 +277,7 @@
                 <button onclick="resetZoom()">↺</button>
                 <button onclick="zoomIn()">+</button>
             </div>
-            <div style="text-align: center; margin-top: 20px;">
+            <div class="modal-poster-details">
                 <h3 id="modal-poster-title"></h3>
                 <p id="modal-poster-authors"></p>
                 <p id="modal-poster-conference"></p>
@@ -539,16 +287,22 @@
     </div>
 
     <footer>
-        <div class="footer-text">
-            <h2>Contact me:</h2> 
-            <a href="mailto:ebutner06@gmail.com" target="_blank">ebutner06@gmail.com</a>
-            <a href="https://www.linkedin.com/in/emma-butner/" target="_blank">LinkedIn</a>
+        <div class="footer-line"></div>
+        <div class="footer-content">
+            <span class="footer-cmd">emma-butner — last commit: 2026</span>
         </div>
     </footer>
 
     <script>
         // Poster data array
         const posters = [
+            {
+                image: 'images/CSBS2026.png',
+                title: 'Effects of Perceptual-Motor Recalibration on Space and Time Perception in Virtual Reality',
+                authors: '<span class="presenting-badge">+</span> <strong>Butner, E.</strong>, Stefanucci, J. K., Creem-Regehr, S. H.',
+                conference: 'University of Utah CSBS Research Day',
+                year: 'April 2026'
+            },
             {
                 image: 'images/may25.png',
                 title: 'Investigating the Utility of Smartphone Passive Sensor Data for Predicting Mental Health Risk in Community Dwelling Adults',
@@ -607,7 +361,7 @@
             }
         ];
 
-        // Poster search functionality
+        // Poster search
         const posterSearch = document.getElementById('poster-search');
         const posterCards = document.querySelectorAll('.poster-card');
         const posterNoResults = document.getElementById('poster-no-results');
@@ -633,40 +387,164 @@
             posterSearch.addEventListener('input', filterPosters);
         }
 
+        // Zoom and pan variables
         let currentZoom = 1;
+        let panX = 0;
+        let panY = 0;
+        let isDragging = false;
+        let dragStartX = 0;
+        let dragStartY = 0;
 
-        // Flip card function
-        function flipCard(index) {
-            const card = document.getElementById(`poster-${index}`);
-            card.classList.toggle('flipped');
+        function updateImageTransform() {
+            const modalImage = document.getElementById('modal-poster-image');
+            const container = document.querySelector('.modal-image-container');
+            
+            if (currentZoom > 1 && container) {
+                // Calculate bounds to prevent dragging image completely off-screen
+                const imgRect = modalImage.getBoundingClientRect();
+                const containerRect = container.getBoundingClientRect();
+                
+                const maxPanX = Math.max(0, (imgRect.width * (currentZoom - 1)) / 2);
+                const maxPanY = Math.max(0, (imgRect.height * (currentZoom - 1)) / 2);
+                
+                panX = Math.min(maxPanX, Math.max(-maxPanX, panX));
+                panY = Math.min(maxPanY, Math.max(-maxPanY, panY));
+            }
+            
+            modalImage.style.transform = `scale(${currentZoom}) translate(${panX}px, ${panY}px)`;
+            modalImage.style.cursor = currentZoom > 1 ? 'grab' : 'default';
         }
 
-        // Abstract modal functions
-        function openAbstractModal() {
-            document.getElementById('abstract-modal').style.display = 'flex';
+        function zoomIn() {
+            if (currentZoom < 3) {
+                currentZoom += 0.25;
+                updateImageTransform();
+            }
+        }
+
+        function zoomOut() {
+            if (currentZoom > 0.5) {
+                currentZoom -= 0.25;
+                if (currentZoom <= 1) {
+                    panX = 0;
+                    panY = 0;
+                }
+                updateImageTransform();
+            }
+        }
+
+        function resetZoom() {
+            currentZoom = 1;
+            panX = 0;
+            panY = 0;
+            updateImageTransform();
+        }
+
+        // Drag functionality for panned image
+        function initDrag() {
+            const modalImage = document.getElementById('modal-poster-image');
+            
+            modalImage.addEventListener('mousedown', function(e) {
+                if (currentZoom > 1) {
+                    isDragging = true;
+                    dragStartX = e.clientX - panX;
+                    dragStartY = e.clientY - panY;
+                    modalImage.style.cursor = 'grabbing';
+                    e.preventDefault();
+                }
+            });
+            
+            window.addEventListener('mousemove', function(e) {
+                if (isDragging && currentZoom > 1) {
+                    panX = e.clientX - dragStartX;
+                    panY = e.clientY - dragStartY;
+                    updateImageTransform();
+                }
+            });
+            
+            window.addEventListener('mouseup', function() {
+                if (isDragging) {
+                    isDragging = false;
+                    const modalImage = document.getElementById('modal-poster-image');
+                    modalImage.style.cursor = 'grab';
+                }
+            });
+        }
+
+        // Touch support for mobile
+        function initTouchDrag() {
+            const modalImage = document.getElementById('modal-poster-image');
+            
+            modalImage.addEventListener('touchstart', function(e) {
+                if (currentZoom > 1) {
+                    isDragging = true;
+                    const touch = e.touches[0];
+                    dragStartX = touch.clientX - panX;
+                    dragStartY = touch.clientY - panY;
+                    e.preventDefault();
+                }
+            });
+            
+            window.addEventListener('touchmove', function(e) {
+                if (isDragging && currentZoom > 1) {
+                    const touch = e.touches[0];
+                    panX = touch.clientX - dragStartX;
+                    panY = touch.clientY - dragStartY;
+                    updateImageTransform();
+                    e.preventDefault();
+                }
+            });
+            
+            window.addEventListener('touchend', function() {
+                isDragging = false;
+            });
+        }
+
+        // Abstract Modal
+        function openAbstractModal(modalId) {
+            const modal = document.getElementById(modalId);
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    closeAbstractModal(modalId);
+                }
+            }
         }
 
-        function closeAbstractModal() {
-            document.getElementById('abstract-modal').style.display = 'none';
+        function closeAbstractModal(modalId) {
+            document.getElementById(modalId).style.display = 'none';
             document.body.style.overflow = 'auto';
         }
 
-        // Poster modal functions
+        // Poster Modal
         function openPosterModal(index) {
             const poster = posters[index];
+            const modal = document.getElementById('poster-modal');
             const modalImage = document.getElementById('modal-poster-image');
             
+            // Reset zoom and pan for new poster
+            currentZoom = 1;
+            panX = 0;
+            panY = 0;
+            
             modalImage.src = poster.image;
-            modalImage.style.transform = `scale(${currentZoom})`;
+            updateImageTransform();
             
             document.getElementById('modal-poster-title').textContent = poster.title;
             document.getElementById('modal-poster-authors').innerHTML = poster.authors;
             document.getElementById('modal-poster-conference').textContent = poster.conference;
             document.getElementById('modal-poster-year').textContent = poster.year;
             
-            document.getElementById('poster-modal').style.display = 'flex';
+            modal.style.display = 'flex';
             document.body.style.overflow = 'hidden';
+            
+            modal.onclick = function(event) {
+                if (event.target === modal) {
+                    closePosterModal();
+                }
+            }
         }
 
         function closePosterModal() {
@@ -675,27 +553,13 @@
             resetZoom();
         }
 
-        // Zoom functions
-        function zoomIn() {
-            if (currentZoom < 3) {
-                currentZoom += 0.25;
-                document.getElementById('modal-poster-image').style.transform = `scale(${currentZoom})`;
-            }
-        }
+        // Initialize drag on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initDrag();
+            initTouchDrag();
+        });
 
-        function zoomOut() {
-            if (currentZoom > 0.5) {
-                currentZoom -= 0.25;
-                document.getElementById('modal-poster-image').style.transform = `scale(${currentZoom})`;
-            }
-        }
-
-        function resetZoom() {
-            currentZoom = 1;
-            document.getElementById('modal-poster-image').style.transform = `scale(${currentZoom})`;
-        }
-
-        // Click on poster card opens zoom modal
+        // Poster card click handlers
         document.querySelectorAll('.poster-card').forEach(card => {
             card.addEventListener('click', function() {
                 const index = parseInt(this.getAttribute('data-poster-index'));
@@ -703,7 +567,7 @@
             });
         });
 
-        // Keyboard support
+        // Keyboard shortcuts
         document.addEventListener('keydown', function(e) {
             if (document.getElementById('poster-modal').style.display === 'flex') {
                 if (e.key === 'Escape') closePosterModal();
@@ -712,18 +576,49 @@
                 if (e.key === '0') resetZoom();
             }
             if (document.getElementById('abstract-modal').style.display === 'flex') {
-                if (e.key === 'Escape') closeAbstractModal();
+                if (e.key === 'Escape') closeAbstractModal('abstract-modal');
+            }
+            if (document.getElementById('abstract-modal1').style.display === 'flex') {
+                if (e.key === 'Escape') closeAbstractModal('abstract-modal1');
             }
         });
 
-        // Click on card to flip (optional)
-        document.querySelectorAll('.poster-card').forEach((card, index) => {
-            card.addEventListener('click', function(e) {
-                if (!e.target.classList.contains('zoom-btn') && 
-                    !e.target.classList.contains('flip-btn')) {
-                    flipCard(index);
-                }
-            });
+        // Toggle extra papers
+        function togglePapers() {
+            const extraPapers = document.querySelector('.extra-papers');
+            const toggleBtn = document.querySelector('.toggle-papers');
+            
+            if (extraPapers.style.display === 'none') {
+                extraPapers.style.display = 'block';
+                toggleBtn.textContent = 'show less ↑';
+            } else {
+                extraPapers.style.display = 'none';
+                toggleBtn.textContent = 'show all →';
+            }
+        }
+
+        // Theme Toggle with localStorage persistence
+        const themeToggle = document.getElementById('theme-toggle');
+
+        // Check saved preference on page load
+        const savedTheme = localStorage.getItem('theme');
+        if (savedTheme === 'light') {
+            document.body.classList.add('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-moon"></i>';
+        } else {
+            document.body.classList.remove('light-theme');
+            themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+        }
+
+        themeToggle.addEventListener('click', function() {
+            const isLight = document.body.classList.toggle('light-theme');
+            if (isLight) {
+                this.innerHTML = '<i class="fas fa-moon"></i>';
+                localStorage.setItem('theme', 'light');
+            } else {
+                this.innerHTML = '<i class="fas fa-sun"></i>';
+                localStorage.setItem('theme', 'dark');
+            }
         });
     </script>
 </body>
